@@ -1,0 +1,19 @@
+package pilot;
+
+
+enum permission_e{
+	MOVE,							// Permission to move robot
+	CHARGE,							// Permission to charge robot
+	INITIALIZE,						// Permission to initialize localization
+	RECORD_DATA,					// Permission to start a data recording
+	REMOTE_CONTROL,					// Permission to control robot remotely
+	RELAY_CONTROL,					// Permission to switch relays
+	DISPLAY_CONTROL,				// Permission to display text on the LCD
+	
+	CHANGE_GRIDMAP,					// Permission to change the active grid map
+	CHANGE_ROADMAP,					// Permission to change the active road map
+	
+	UPLOAD_SCRIPT,					// Permission to upload / overwrite scripts
+	EXECUTE_SCRIPT,					// Permission to execute scripts
+	INTERVENE_SCRIPT,				// Permission to pause / resume scripts
+}

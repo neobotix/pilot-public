@@ -1,0 +1,14 @@
+package pilot;
+
+class PowerState {
+	
+	long time;									// POSIX timestamp [usec]
+	
+	power_system_type_e power_system_type;
+	
+	charging_state_e charging_state;
+	
+	bool is_charging;							// if charging is enabled
+	
+}
+

@@ -1,0 +1,7 @@
+package pilot;
+
+class BeagleBoardData {
+	
+	vector<bool> relay_states;					// 4 relays (true = active, false = inactive)
+	
+}

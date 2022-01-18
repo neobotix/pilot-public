@@ -1,0 +1,8 @@
+package pilot;
+
+enum battery_type_e {
+	
+	AGM,
+	LFP
+	
+}

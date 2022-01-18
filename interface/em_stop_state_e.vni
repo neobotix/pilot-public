@@ -1,0 +1,9 @@
+package pilot;
+
+enum em_stop_state_e {
+	
+	FREE,
+	STOPPED,
+	CONFIRMED
+	
+}

@@ -1,0 +1,8 @@
+package pilot;
+
+enum power_system_type_e {
+	
+	POWER_24V,
+	POWER_48V
+	
+}

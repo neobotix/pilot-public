@@ -1,0 +1,11 @@
+package pilot;
+
+class EmergencyState {
+	
+	long time;						// POSIX timestamp [usec]
+	
+	safety_code_e code;
+	
+	em_stop_state_e state;
+	
+}

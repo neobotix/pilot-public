@@ -1,0 +1,13 @@
+package pilot;
+
+enum charging_state_e {
+	
+	NOT_CHARGING,
+	IS_CHARGING,
+	NO_CHARGER,
+	BRAKES_OPEN,
+	EM_STOP,
+	ABORTED,
+	FINISHED
+	
+}

@@ -1,0 +1,9 @@
+package pilot.kinematics.mecanum;
+
+class DriveCmd {
+	
+	long time;				// POSIX timestamp [usec]
+	
+	pilot.kinematics.Velocity4 velocity;			// [rad/s]
+	
+}

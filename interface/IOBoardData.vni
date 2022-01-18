@@ -1,0 +1,14 @@
+package pilot;
+
+class IOBoardData {
+	
+	long time;									// POSIX timestamp [usec]
+	
+	bool digital_input[16];
+	bool digital_output[16];
+	
+	short analog_input[8];						// 0 to 1023 (1023 = 5V)
+	
+	float analog_input_scale = 0.004887;		// factor to convert to volts
+	
+}

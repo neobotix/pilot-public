@@ -1,0 +1,16 @@
+package pilot;
+
+class Event {
+	
+	long time;					// POSIX timestamp [usec]
+	
+	event_t event;
+	
+	int level;					// display level
+	
+	vnx.Object info;			// additional info (optional)
+	
+	
+	static Event* create_ex(long time, event_t event, int level, vnx.Object info);
+	
+}

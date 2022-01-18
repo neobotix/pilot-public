@@ -1,0 +1,9 @@
+package pilot;
+
+enum safety_code_e {
+	
+	NONE,
+	SCANNER_STOP,
+	EMERGENCY_STOP,
+	
+}

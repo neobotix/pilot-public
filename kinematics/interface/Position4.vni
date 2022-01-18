@@ -1,0 +1,10 @@
+package pilot.kinematics;
+
+class Position4 {
+	
+	double front_left;			// [rad]
+	double back_left;			// [rad]
+	double back_right;			// [rad]
+	double front_right;			// [rad]
+	
+}

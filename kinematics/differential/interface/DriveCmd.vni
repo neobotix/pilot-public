@@ -1,0 +1,9 @@
+package pilot.kinematics.differential;
+
+class DriveCmd {
+	
+	long time;				// POSIX timestamp [usec]
+	
+	pilot.kinematics.Velocity2 velocity;			// [rad/s]
+	
+}

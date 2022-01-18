@@ -1,0 +1,13 @@
+package pilot;
+
+class USBoardData {
+	
+	long time;									// POSIX timestamp [usec]
+	
+	float sensor[16];							// distance, zero = no measurement [m]
+	
+	short analog_input[4];						// 0 to 1023 (1023 = 5V)
+	
+	float analog_input_scale = 0.004887;		// factor to convert to volts
+	
+}

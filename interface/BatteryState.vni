@@ -1,0 +1,17 @@
+package pilot;
+
+class BatteryState {
+	
+	long time;						// POSIX timestamp [usec]
+	
+	float remaining;				// 0 to 1
+	
+	float voltage;					// [V]
+	
+	float current;					// positive = charging [A]
+	
+	float temperature;				// [C]
+	
+	battery_type_e type;
+	
+}

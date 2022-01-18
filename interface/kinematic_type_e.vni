@@ -1,0 +1,11 @@
+package pilot;
+
+enum kinematic_type_e {
+	
+	NONE,
+	DIFFERENTIAL,
+	MECANUM,
+	OMNIDRIVE,
+	SIMULATION
+	
+}

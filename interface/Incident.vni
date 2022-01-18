@@ -1,0 +1,14 @@
+package pilot;
+
+class Incident extends Event {
+	
+	bool is_active;				// if incident is active and could be published periodically
+	
+	bool is_cleared;			// if incident has been cleared / resolved
+	
+	int timeout_ms = 3000;		// timeout for active incidents [ms]
+	
+	
+	static Incident* create_ex(long time, event_t event, int level, vnx.Object info, bool is_active, int timeout_ms = 3000);
+	
+}

@@ -1,0 +1,31 @@
+package pilot;
+
+interface PlatformInterface {
+	
+	@Permission(permission_e.CHARGE)
+	void charge() async;
+	
+	@Permission(permission_e.CHARGE)
+	void start_charging();
+	
+	@Permission(permission_e.CHARGE)
+	void stop_charging();
+	
+	@Permission(permission_e.RELAY_CONTROL)
+	void set_relay(int channel, bool state);
+	
+	@Permission(permission_e.RELAY_CONTROL)
+	void set_digital_output(int channel, bool state);
+	
+	@Permission(permission_e.DISPLAY_CONTROL)
+	void set_display_text(string line);
+	
+	float read_analog_input(int channel) const;				// [V]
+	
+	bool read_digital_input(int channel) const;
+	
+	void wait_for_digital_input(int channel, bool state) const async;
+	
+	@Permission(HOST_SHUTDOWN)
+	void shutdown();
+}

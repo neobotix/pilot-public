@@ -1,0 +1,9 @@
+package pilot;
+
+enum event_type_e {
+	
+	ERROR,
+	WARNING,
+	NOTIFICATION
+	
+}

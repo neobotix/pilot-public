@@ -1,0 +1,11 @@
+package pilot.kinematics.omnidrive;
+
+class DriveCmd {
+	
+	long time;				// POSIX timestamp [usec]
+	
+	pilot.kinematics.Velocity4 drive_vel;			// [rad/s]
+	
+	pilot.kinematics.Position4 steer_pos;			// [rad]
+	
+}

@@ -1,0 +1,13 @@
+package pilot;
+
+class SystemState {
+	
+	long time;									// POSIX timestamp [usec]
+	
+	set<system_error_e> system_errors;
+	
+	bool is_shutdown;							// if true host system is asked to shut down
+	
+	bool is_initialized;						// if platform is initialized (hardware wise)
+	
+}

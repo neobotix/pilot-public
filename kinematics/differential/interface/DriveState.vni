@@ -1,0 +1,15 @@
+package pilot.kinematics.differential;
+
+class DriveState {
+	
+	long time;				// POSIX timestamp [usec]
+	
+	pilot.kinematics.Position2 position;
+	
+	pilot.kinematics.Velocity2 velocity;
+	
+	pilot.kinematics.Torque2 torque;
+	
+	bool has_torque;
+	
+}

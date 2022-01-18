@@ -1,0 +1,10 @@
+package pilot.kinematics;
+
+class Torque4 {
+	
+	float front_left;			// [N*m]
+	float back_left;			// [N*m]
+	float back_right;			// [N*m]
+	float front_right;			// [N*m]
+	
+}

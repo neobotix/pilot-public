@@ -1,0 +1,10 @@
+package pilot.kinematics;
+
+class Velocity4 {
+	
+	float front_left;			// [rad/s]
+	float back_left;			// [rad/s]
+	float back_right;			// [rad/s]
+	float front_right;			// [rad/s]
+	
+}

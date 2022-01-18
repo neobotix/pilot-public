@@ -1,0 +1,9 @@
+package pilot;
+
+enum battery_code_e {
+	
+	LOW,
+	CRITICAL,
+	OVERHEAT
+	
+}

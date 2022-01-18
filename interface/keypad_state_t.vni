@@ -1,0 +1,13 @@
+package pilot;
+
+struct keypad_state_t {
+	
+	bool info_button;
+	bool home_button;
+	bool start_button;
+	bool stop_button;
+	bool brake_release_button;
+	
+	bool digital_input[3];
+	
+}

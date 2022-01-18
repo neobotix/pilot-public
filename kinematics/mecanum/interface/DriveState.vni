@@ -1,0 +1,15 @@
+package pilot.kinematics.mecanum;
+
+class DriveState {
+	
+	long time;				// POSIX timestamp [usec]
+	
+	pilot.kinematics.Position4 position;
+	
+	pilot.kinematics.Velocity4 velocity;
+	
+	pilot.kinematics.Torque4 torque;
+	
+	bool has_torque;
+	
+}
