@@ -16,7 +16,6 @@ target_link_libraries(pilot_kinematics_differential_interface
 )
 
 install(DIRECTORY generated/include/ DESTINATION include)
-install(DIRECTORY modules/ DESTINATION interface/pilot/kinematics/differential)
 install(DIRECTORY interface/ DESTINATION interface/pilot/kinematics/differential)
 install(TARGETS pilot_kinematics_differential_interface DESTINATION lib)
 

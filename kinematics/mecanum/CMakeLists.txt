@@ -16,7 +16,6 @@ target_link_libraries(pilot_kinematics_mecanum_interface
 )
 
 install(DIRECTORY generated/include/ DESTINATION include)
-install(DIRECTORY modules/ DESTINATION interface/pilot/kinematics/mecanum)
 install(DIRECTORY interface/ DESTINATION interface/pilot/kinematics/mecanum)
 install(TARGETS pilot_kinematics_mecanum_interface DESTINATION lib)
 
