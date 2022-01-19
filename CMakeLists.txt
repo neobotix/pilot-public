@@ -23,7 +23,6 @@ target_link_libraries(pilot_public
 
 add_subdirectory(kinematics)
 
-install(DIRECTORY include/ DESTINATION include)
 install(DIRECTORY generated/include/ DESTINATION include)
 install(DIRECTORY interface/ DESTINATION interface/pilot)
 install(TARGETS pilot_public DESTINATION lib)
