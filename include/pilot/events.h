@@ -10,7 +10,6 @@
 
 #include <pilot/Event.hxx>
 #include <pilot/Incident.hxx>
-#include <pilot/topics.h>
 
 #include <vnx/Time.h>
 
