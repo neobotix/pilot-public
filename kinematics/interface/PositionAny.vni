@@ -1,0 +1,11 @@
+package pilot.kinematics;
+
+class PositionAny {
+
+	map<position_code_e, double> positions;                     // [rad]
+	
+	double get(position_code_e position) const;
+	void set(position_code_e position, double value);
+	
+}
+

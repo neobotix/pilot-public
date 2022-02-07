@@ -4,8 +4,8 @@ class DriveCmd {
 	
 	long time;				// POSIX timestamp [usec]
 	
-	pilot.kinematics.Velocity4 drive_vel;			// [rad/s]
+	pilot.kinematics.VelocityAny drive_vel;			// [rad/s]
 	
-	pilot.kinematics.Position4 steer_pos;			// [rad]
+	pilot.kinematics.PositionAny steer_pos;			// [rad]
 	
 }
