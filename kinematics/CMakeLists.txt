@@ -4,6 +4,9 @@ file(GLOB GENERATED_SOURCE_FILES generated/src/*.cpp)
 
 add_library(pilot_kinematics SHARED
 	${GENERATED_SOURCE_FILES}
+	src/PositionAny.cpp
+	src/VelocityAny.cpp
+	src/TorqueAny.cpp
 )
 
 target_include_directories(pilot_kinematics PUBLIC

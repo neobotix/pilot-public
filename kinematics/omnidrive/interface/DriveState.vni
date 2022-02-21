@@ -4,14 +4,14 @@ class DriveState {
 	
 	long time;				// POSIX timestamp [usec]
 	
-	pilot.kinematics.Position4 drive_pos;
-	pilot.kinematics.Position4 steer_pos;
+	pilot.kinematics.PositionAny drive_pos;
+	pilot.kinematics.PositionAny steer_pos;
 	
-	pilot.kinematics.Velocity4 drive_vel;
-	pilot.kinematics.Velocity4 steer_vel;
+	pilot.kinematics.VelocityAny drive_vel;
+	pilot.kinematics.VelocityAny steer_vel;
 	
-	pilot.kinematics.Torque4 drive_torque;
-	pilot.kinematics.Torque4 steer_torque;
+	pilot.kinematics.TorqueAny drive_torque;
+	pilot.kinematics.TorqueAny steer_torque;
 	
 	bool has_torque;
 	

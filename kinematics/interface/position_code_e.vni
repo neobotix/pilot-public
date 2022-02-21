@@ -2,17 +2,16 @@ package pilot.kinematics;
 
 enum position_code_e {
 	
-	CUSTOM,
-	
 	LEFT,
 	RIGHT,
+	FRONT,
+	BACK,
 	
 	FRONT_LEFT,
 	FRONT_RIGHT,
 	BACK_LEFT,
 	BACK_RIGHT,
 	
-	STEER,
-	DRIVE
+	MIDDLE,
 	
 }
