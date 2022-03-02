@@ -26,6 +26,9 @@ interface PlatformInterface {
 	
 	void wait_for_digital_input(int channel, bool state) const async;
 	
+	@Permission(permission_e.MOVE)
+	void initialize_motors(string module_name, vnx.Object config);
+	
 	@Permission(HOST_SHUTDOWN)
 	void shutdown();
 }
