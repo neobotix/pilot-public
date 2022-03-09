@@ -7,7 +7,6 @@ add_library(pilot_kinematics_mecanum_interface SHARED
 )
 
 target_include_directories(pilot_kinematics_mecanum_interface PUBLIC
-	include
 	generated/include
 )
 

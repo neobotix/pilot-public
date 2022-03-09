@@ -7,7 +7,6 @@ add_library(pilot_kinematics_omnidrive_interface SHARED
 )
 
 target_include_directories(pilot_kinematics_omnidrive_interface PUBLIC
-	include
 	generated/include
 )
 
