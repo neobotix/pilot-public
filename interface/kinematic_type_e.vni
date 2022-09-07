@@ -4,6 +4,7 @@ enum kinematic_type_e {
 	
 	NONE,
 	DIFFERENTIAL,
+	BICYCLE,
 	MECANUM,
 	OMNIDRIVE,
 	SIMULATION

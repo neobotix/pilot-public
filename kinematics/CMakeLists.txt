@@ -4,6 +4,7 @@ file(GLOB GENERATED_SOURCE_FILES generated/src/*.cpp)
 
 add_library(pilot_kinematics SHARED
 	${GENERATED_SOURCE_FILES}
+	src/steering_drive_t.cpp
 	src/PositionAny.cpp
 	src/VelocityAny.cpp
 	src/TorqueAny.cpp
@@ -21,6 +22,7 @@ install(DIRECTORY interface/ DESTINATION interface/pilot/kinematics)
 install(TARGETS pilot_kinematics DESTINATION lib)
 
 add_subdirectory(differential)
+add_subdirectory(bicycle)
 add_subdirectory(mecanum)
 add_subdirectory(omnidrive)
 

@@ -1,0 +1,9 @@
+package pilot.kinematics.bicycle;
+
+class DriveCmd {
+	long time;                     // POSIX timestamp [usec]
+
+	pilot.kinematics.PositionAny steer_pos;
+	pilot.kinematics.VelocityAny drive_vel;
+}
+
