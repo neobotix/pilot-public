@@ -1,0 +1,8 @@
+package pilot.kinematics;
+
+class Position1 {
+	
+	position_code_e position;
+	double value;				// [rad]
+	
+}

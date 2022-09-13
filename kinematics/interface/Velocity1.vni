@@ -1,0 +1,8 @@
+package pilot.kinematics;
+
+class Velocity1 {
+	
+	position_code_e position;
+	float value;				// [rad/s]
+	
+}

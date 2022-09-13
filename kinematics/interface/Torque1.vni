@@ -1,0 +1,8 @@
+package pilot.kinematics;
+
+class Torque1 {
+	
+	position_code_e position;
+	float value;				// [N*m]
+	
+}

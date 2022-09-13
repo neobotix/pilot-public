@@ -3,9 +3,9 @@ package pilot.kinematics.bicycle;
 class DriveState {
 	long time;                    // POSIX timestamp [usec]
 
-	pilot.kinematics.PositionAny steer_pos;
-	pilot.kinematics.VelocityAny drive_vel;
-	pilot.kinematics.TorqueAny torque;
+	pilot.kinematics.Position1 steer_pos;
+	pilot.kinematics.Velocity1 drive_vel;
+	pilot.kinematics.Torque1 torque;
 
 	bool has_torque;
 }
