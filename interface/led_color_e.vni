@@ -1,0 +1,9 @@
+package pilot;
+
+enum led_color_e{
+	RED,
+	GREEN,
+	BLUE,
+	WHITE,
+}
+

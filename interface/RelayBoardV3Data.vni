@@ -1,0 +1,21 @@
+package pilot;
+
+class RelayBoardV3Data {
+
+	long time;                                              // POSIX timestamp [usec]
+
+	float ambient_temperature;                              // [°C]
+
+	vector<bool> relay_states;                              // 4 relays (true = active, false = inactive)
+
+	vector<bool> digital_input_states;
+
+	vector<bool> keypad_button_states;
+
+	map<led_color_e, double> led_states;                    // color => amount [0-1]
+
+	bool key_switch_off_state;                              // true for pressed
+
+	bool release_structure_state;
+
+}

@@ -20,14 +20,17 @@ interface PlatformInterface {
 	@Permission(permission_e.DISPLAY_CONTROL)
 	void set_display_text(string line);
 	
+	@Permission(permission_e.LED_CONTROL)
+	void set_led(led_color_e color, double amount);
+	
+	@Permission(permission_e.LED_CONTROL)
+	void set_leds(map<led_color_e, double> led_amount_map);
+	
 	float read_analog_input(int channel) const;				// [V]
 	
 	bool read_digital_input(int channel) const;
 	
 	void wait_for_digital_input(int channel, bool state) const async;
-	
-	@Permission(permission_e.MOVE)
-	void initialize_motors(string module_name, vnx.Object config);
 	
 	@Permission(HOST_SHUTDOWN)
 	void shutdown();

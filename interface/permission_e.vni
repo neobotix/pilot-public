@@ -9,6 +9,7 @@ enum permission_e{
 	REMOTE_CONTROL,					// Permission to control robot remotely
 	RELAY_CONTROL,					// Permission to switch relays
 	DISPLAY_CONTROL,				// Permission to display text on the LCD
+	LED_CONTROL,					// Permission to control LEDs
 	
 	CHANGE_GRIDMAP,					// Permission to change the active grid map
 	CHANGE_ROADMAP,					// Permission to change the active road map
