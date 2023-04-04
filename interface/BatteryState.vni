@@ -10,8 +10,15 @@ class BatteryState {
 	
 	float current;					// positive = charging [A]
 	
-	float temperature;				// [C]
+	float charge;					// [C = As]
+	
+	float capacity;					// last full capacity [C = As]
+	
+	float design_capacity;			// [C = As]
+	
+	float temperature;				// [°C]
 	
 	battery_type_e type;
 	
+	string serial_number;
 }
