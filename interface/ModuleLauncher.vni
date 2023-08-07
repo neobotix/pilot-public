@@ -1,0 +1,10 @@
+package pilot;
+
+interface ModuleLauncher {
+	void launch(vnx.Object config);                       // (re)launch the specified set of modules. Interpretation of config is implementation specific.
+	void add(vnx.Object config);                          // launch modules in addition to the running modules. Interpretation of config is implementation specific.
+	void stop(string name);                               // stop the module with the given name
+	void stop_all();                                      // stop all launched modules
+	vector<string> get_names() const;                     // get the names of all launched modules
+}
+
