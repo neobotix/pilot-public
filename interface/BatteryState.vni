@@ -10,11 +10,11 @@ class BatteryState {
 	
 	float current;					// positive = charging [A]
 	
-	float charge;					// [C = As]
+	optional<float> charge;			// [C = As]
 	
-	float capacity;					// last full capacity [C = As]
+	optional<float> capacity;		// last full capacity [C = As]
 	
-	float design_capacity;			// [C = As]
+	optional<float> design_capacity;// [C = As]
 	
 	float temperature;				// [°C]
 	
