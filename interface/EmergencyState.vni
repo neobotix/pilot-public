@@ -8,4 +8,5 @@ class EmergencyState {
 	
 	em_stop_state_e state;
 	
+	optional<bool> brakes_closed;
 }

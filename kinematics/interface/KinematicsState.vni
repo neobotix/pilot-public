@@ -1,0 +1,8 @@
+package pilot.kinematics;
+
+class KinematicsState{
+	long time;
+	bool is_vel_cmd;                                       // nonzero velocity commanded
+	bool is_moving;                                        // physical movement
+}
+
