@@ -4,6 +4,8 @@ class RelayBoardV3Data {
 
 	long time;                                              // POSIX timestamp [usec]
 
+	string firmware_version;
+
 	float ambient_temperature;                              // [°C]
 
 	vector<bool> relay_states;                              // 4 relays (true = active, false = inactive)
