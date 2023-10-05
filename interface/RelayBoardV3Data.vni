@@ -6,6 +6,8 @@ class RelayBoardV3Data {
 
 	string firmware_version;
 
+	long uptime;                                            // time since last module restart / reconfig [usec]
+
 	float ambient_temperature;                              // [°C]
 
 	vector<bool> relay_states;                              // 4 relays (true = active, false = inactive)
