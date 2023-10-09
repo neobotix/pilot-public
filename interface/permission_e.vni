@@ -10,6 +10,7 @@ enum permission_e{
 	RELAY_CONTROL,					// Permission to switch relays
 	DISPLAY_CONTROL,				// Permission to display text on the LCD
 	LED_CONTROL,					// Permission to control LEDs
+	SAFETY_FIELD_CONTROL,			// Permission to switch the safety field
 	
 	CHANGE_GRIDMAP,					// Permission to change the active grid map
 	CHANGE_ROADMAP,					// Permission to change the active road map

@@ -1,0 +1,7 @@
+package pilot;
+
+interface SafetyInterface{
+	@Permission(permission_e.SAFETY_FIELD_CONTROL)
+	void select_safety_field(uint field_id);
+}
+
