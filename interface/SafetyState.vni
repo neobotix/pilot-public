@@ -3,5 +3,5 @@ package pilot;
 class SafetyState{
 	long time;
 	uint current_safety_field;                                                       // fieldset ID
-	set<uchar> triggered_shutdown_paths;                                             // 0 to 7
+	set<uchar> triggered_cutoff_paths;                                               // 0 to 7
 }
