@@ -23,6 +23,7 @@ public:
 	vnx::optional<vnx::float32_t> design_capacity;
 	vnx::float32_t temperature = 0;
 	::pilot::battery_type_e type;
+	int32_t module_count = -1;
 	std::string serial_number;
 	
 	typedef ::vnx::Value Super;

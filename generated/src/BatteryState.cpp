@@ -13,7 +13,7 @@ namespace pilot {
 
 
 const vnx::Hash64 BatteryState::VNX_TYPE_HASH(0xc6790e4d7b66f791ull);
-const vnx::Hash64 BatteryState::VNX_CODE_HASH(0x3d0126f4bb04ba44ull);
+const vnx::Hash64 BatteryState::VNX_CODE_HASH(0x882f7f0d5cc384ccull);
 
 vnx::Hash64 BatteryState::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -55,7 +55,8 @@ void BatteryState::accept(vnx::Visitor& _visitor) const {
 	_visitor.type_field(_type_code->fields[6], 6); vnx::accept(_visitor, design_capacity);
 	_visitor.type_field(_type_code->fields[7], 7); vnx::accept(_visitor, temperature);
 	_visitor.type_field(_type_code->fields[8], 8); vnx::accept(_visitor, type);
-	_visitor.type_field(_type_code->fields[9], 9); vnx::accept(_visitor, serial_number);
+	_visitor.type_field(_type_code->fields[9], 9); vnx::accept(_visitor, module_count);
+	_visitor.type_field(_type_code->fields[10], 10); vnx::accept(_visitor, serial_number);
 	_visitor.type_end(*_type_code);
 }
 
@@ -70,6 +71,7 @@ void BatteryState::write(std::ostream& _out) const {
 	_out << ", \"design_capacity\": "; vnx::write(_out, design_capacity);
 	_out << ", \"temperature\": "; vnx::write(_out, temperature);
 	_out << ", \"type\": "; vnx::write(_out, type);
+	_out << ", \"module_count\": "; vnx::write(_out, module_count);
 	_out << ", \"serial_number\": "; vnx::write(_out, serial_number);
 	_out << "}";
 }
@@ -92,6 +94,7 @@ vnx::Object BatteryState::to_object() const {
 	_object["design_capacity"] = design_capacity;
 	_object["temperature"] = temperature;
 	_object["type"] = type;
+	_object["module_count"] = module_count;
 	_object["serial_number"] = serial_number;
 	return _object;
 }
@@ -106,6 +109,8 @@ void BatteryState::from_object(const vnx::Object& _object) {
 			_entry.second.to(current);
 		} else if(_entry.first == "design_capacity") {
 			_entry.second.to(design_capacity);
+		} else if(_entry.first == "module_count") {
+			_entry.second.to(module_count);
 		} else if(_entry.first == "remaining") {
 			_entry.second.to(remaining);
 		} else if(_entry.first == "serial_number") {
@@ -150,6 +155,9 @@ vnx::Variant BatteryState::get_field(const std::string& _name) const {
 	if(_name == "type") {
 		return vnx::Variant(type);
 	}
+	if(_name == "module_count") {
+		return vnx::Variant(module_count);
+	}
 	if(_name == "serial_number") {
 		return vnx::Variant(serial_number);
 	}
@@ -175,6 +183,8 @@ void BatteryState::set_field(const std::string& _name, const vnx::Variant& _valu
 		_value.to(temperature);
 	} else if(_name == "type") {
 		_value.to(type);
+	} else if(_name == "module_count") {
+		_value.to(module_count);
 	} else if(_name == "serial_number") {
 		_value.to(serial_number);
 	} else {
@@ -206,14 +216,14 @@ std::shared_ptr<vnx::TypeCode> BatteryState::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.BatteryState";
 	type_code->type_hash = vnx::Hash64(0xc6790e4d7b66f791ull);
-	type_code->code_hash = vnx::Hash64(0x3d0126f4bb04ba44ull);
+	type_code->code_hash = vnx::Hash64(0x882f7f0d5cc384ccull);
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->native_size = sizeof(::pilot::BatteryState);
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<BatteryState>(); };
 	type_code->depends.resize(1);
 	type_code->depends[0] = ::pilot::battery_type_e::static_get_type_code();
-	type_code->fields.resize(10);
+	type_code->fields.resize(11);
 	{
 		auto& field = type_code->fields[0];
 		field.data_size = 8;
@@ -270,6 +280,13 @@ std::shared_ptr<vnx::TypeCode> BatteryState::static_create_type_code() {
 	}
 	{
 		auto& field = type_code->fields[9];
+		field.data_size = 4;
+		field.name = "module_count";
+		field.value = vnx::to_string(-1);
+		field.code = {7};
+	}
+	{
+		auto& field = type_code->fields[10];
 		field.is_extended = true;
 		field.name = "serial_number";
 		field.code = {32};
@@ -331,6 +348,9 @@ void read(TypeInput& in, ::pilot::BatteryState& value, const TypeCode* type_code
 		if(const auto* const _field = type_code->field_map[7]) {
 			vnx::read_value(_buf + _field->offset, value.temperature, _field->code.data());
 		}
+		if(const auto* const _field = type_code->field_map[9]) {
+			vnx::read_value(_buf + _field->offset, value.module_count, _field->code.data());
+		}
 	}
 	for(const auto* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
@@ -338,7 +358,7 @@ void read(TypeInput& in, ::pilot::BatteryState& value, const TypeCode* type_code
 			case 5: vnx::read(in, value.capacity, type_code, _field->code.data()); break;
 			case 6: vnx::read(in, value.design_capacity, type_code, _field->code.data()); break;
 			case 8: vnx::read(in, value.type, type_code, _field->code.data()); break;
-			case 9: vnx::read(in, value.serial_number, type_code, _field->code.data()); break;
+			case 10: vnx::read(in, value.serial_number, type_code, _field->code.data()); break;
 			default: vnx::skip(in, type_code, _field->code.data());
 		}
 	}
@@ -357,17 +377,18 @@ void write(TypeOutput& out, const ::pilot::BatteryState& value, const TypeCode* 
 	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
-	char* const _buf = out.write(24);
+	char* const _buf = out.write(28);
 	vnx::write_value(_buf + 0, value.time);
 	vnx::write_value(_buf + 8, value.remaining);
 	vnx::write_value(_buf + 12, value.voltage);
 	vnx::write_value(_buf + 16, value.current);
 	vnx::write_value(_buf + 20, value.temperature);
+	vnx::write_value(_buf + 24, value.module_count);
 	vnx::write(out, value.charge, type_code, type_code->fields[4].code.data());
 	vnx::write(out, value.capacity, type_code, type_code->fields[5].code.data());
 	vnx::write(out, value.design_capacity, type_code, type_code->fields[6].code.data());
 	vnx::write(out, value.type, type_code, type_code->fields[8].code.data());
-	vnx::write(out, value.serial_number, type_code, type_code->fields[9].code.data());
+	vnx::write(out, value.serial_number, type_code, type_code->fields[10].code.data());
 }
 
 void read(std::istream& in, ::pilot::BatteryState& value) {
