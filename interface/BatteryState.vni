@@ -20,5 +20,7 @@ class BatteryState {
 	
 	battery_type_e type;
 	
+	int module_count = -1;			// number of battery modules, -1 if unknown
+	
 	string serial_number;
 }
