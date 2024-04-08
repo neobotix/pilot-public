@@ -19,6 +19,7 @@ public:
 	::pilot::power_system_type_e power_system_type;
 	::pilot::charging_state_e charging_state;
 	vnx::bool_t is_charging = 0;
+	vnx::float64_t charging_current = 0;
 	
 	typedef ::vnx::Value Super;
 	

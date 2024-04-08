@@ -14,7 +14,7 @@ namespace pilot {
 
 
 const vnx::Hash64 PowerState::VNX_TYPE_HASH(0x83624e8e635643efull);
-const vnx::Hash64 PowerState::VNX_CODE_HASH(0x8e598641ad5c3e2cull);
+const vnx::Hash64 PowerState::VNX_CODE_HASH(0xf37c4748dc0256c5ull);
 
 vnx::Hash64 PowerState::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -51,6 +51,7 @@ void PowerState::accept(vnx::Visitor& _visitor) const {
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, power_system_type);
 	_visitor.type_field(_type_code->fields[2], 2); vnx::accept(_visitor, charging_state);
 	_visitor.type_field(_type_code->fields[3], 3); vnx::accept(_visitor, is_charging);
+	_visitor.type_field(_type_code->fields[4], 4); vnx::accept(_visitor, charging_current);
 	_visitor.type_end(*_type_code);
 }
 
@@ -60,6 +61,7 @@ void PowerState::write(std::ostream& _out) const {
 	_out << ", \"power_system_type\": "; vnx::write(_out, power_system_type);
 	_out << ", \"charging_state\": "; vnx::write(_out, charging_state);
 	_out << ", \"is_charging\": "; vnx::write(_out, is_charging);
+	_out << ", \"charging_current\": "; vnx::write(_out, charging_current);
 	_out << "}";
 }
 
@@ -76,12 +78,15 @@ vnx::Object PowerState::to_object() const {
 	_object["power_system_type"] = power_system_type;
 	_object["charging_state"] = charging_state;
 	_object["is_charging"] = is_charging;
+	_object["charging_current"] = charging_current;
 	return _object;
 }
 
 void PowerState::from_object(const vnx::Object& _object) {
 	for(const auto& _entry : _object.field) {
-		if(_entry.first == "charging_state") {
+		if(_entry.first == "charging_current") {
+			_entry.second.to(charging_current);
+		} else if(_entry.first == "charging_state") {
 			_entry.second.to(charging_state);
 		} else if(_entry.first == "is_charging") {
 			_entry.second.to(is_charging);
@@ -106,6 +111,9 @@ vnx::Variant PowerState::get_field(const std::string& _name) const {
 	if(_name == "is_charging") {
 		return vnx::Variant(is_charging);
 	}
+	if(_name == "charging_current") {
+		return vnx::Variant(charging_current);
+	}
 	return vnx::Variant();
 }
 
@@ -118,6 +126,8 @@ void PowerState::set_field(const std::string& _name, const vnx::Variant& _value)
 		_value.to(charging_state);
 	} else if(_name == "is_charging") {
 		_value.to(is_charging);
+	} else if(_name == "charging_current") {
+		_value.to(charging_current);
 	} else {
 		throw std::logic_error("no such field: '" + _name + "'");
 	}
@@ -147,7 +157,7 @@ std::shared_ptr<vnx::TypeCode> PowerState::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.PowerState";
 	type_code->type_hash = vnx::Hash64(0x83624e8e635643efull);
-	type_code->code_hash = vnx::Hash64(0x8e598641ad5c3e2cull);
+	type_code->code_hash = vnx::Hash64(0xf37c4748dc0256c5ull);
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->native_size = sizeof(::pilot::PowerState);
@@ -155,7 +165,7 @@ std::shared_ptr<vnx::TypeCode> PowerState::static_create_type_code() {
 	type_code->depends.resize(2);
 	type_code->depends[0] = ::pilot::power_system_type_e::static_get_type_code();
 	type_code->depends[1] = ::pilot::charging_state_e::static_get_type_code();
-	type_code->fields.resize(4);
+	type_code->fields.resize(5);
 	{
 		auto& field = type_code->fields[0];
 		field.data_size = 8;
@@ -179,6 +189,12 @@ std::shared_ptr<vnx::TypeCode> PowerState::static_create_type_code() {
 		field.data_size = 1;
 		field.name = "is_charging";
 		field.code = {31};
+	}
+	{
+		auto& field = type_code->fields[4];
+		field.data_size = 8;
+		field.name = "charging_current";
+		field.code = {10};
 	}
 	type_code->build();
 	return type_code;
@@ -228,6 +244,9 @@ void read(TypeInput& in, ::pilot::PowerState& value, const TypeCode* type_code, 
 		if(const auto* const _field = type_code->field_map[3]) {
 			vnx::read_value(_buf + _field->offset, value.is_charging, _field->code.data());
 		}
+		if(const auto* const _field = type_code->field_map[4]) {
+			vnx::read_value(_buf + _field->offset, value.charging_current, _field->code.data());
+		}
 	}
 	for(const auto* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
@@ -251,9 +270,10 @@ void write(TypeOutput& out, const ::pilot::PowerState& value, const TypeCode* ty
 	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
-	char* const _buf = out.write(9);
+	char* const _buf = out.write(17);
 	vnx::write_value(_buf + 0, value.time);
 	vnx::write_value(_buf + 8, value.is_charging);
+	vnx::write_value(_buf + 9, value.charging_current);
 	vnx::write(out, value.power_system_type, type_code, type_code->fields[1].code.data());
 	vnx::write(out, value.charging_state, type_code, type_code->fields[2].code.data());
 }
