@@ -10,5 +10,7 @@ class PowerState {
 	
 	bool is_charging;							// if charging is enabled
 	
+	double charging_current;					// [A]
+	
 }
 
