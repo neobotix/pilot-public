@@ -8,7 +8,7 @@ class BatteryState {
 	
 	float voltage;					// [V]
 	
-	float current;					// positive = charging [A]
+	optional<float> current;		// positive = charging [A]
 	
 	optional<float> charge;			// [C = As]
 	
