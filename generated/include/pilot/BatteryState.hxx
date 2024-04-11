@@ -17,7 +17,7 @@ public:
 	int64_t time = 0;
 	vnx::float32_t remaining = 0;
 	vnx::float32_t voltage = 0;
-	vnx::float32_t current = 0;
+	vnx::optional<vnx::float32_t> current;
 	vnx::optional<vnx::float32_t> charge;
 	vnx::optional<vnx::float32_t> capacity;
 	vnx::optional<vnx::float32_t> design_capacity;
