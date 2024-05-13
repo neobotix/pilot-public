@@ -10,8 +10,7 @@
 
 namespace pilot {
 
-std::shared_ptr<const Incident> Incident::create_ex(	const int64_t& time, const event_t& event, const int32_t& level,
-														const ::vnx::Object& info, const vnx::bool_t& is_active, const int32_t& timeout_ms)
+std::shared_ptr<const Incident> Incident::create_ex(const int64_t& time, const event_t& event, const int32_t& level, const ::vnx::Object& info, const vnx::bool_t& is_active, const int32_t& timeout_ms)
 {
 	auto out = Incident::create();
 	out->time = time;
@@ -21,6 +20,11 @@ std::shared_ptr<const Incident> Incident::create_ex(	const int64_t& time, const 
 	out->is_active = is_active;
 	out->timeout_ms = timeout_ms;
 	return out;
+}
+
+
+std::string Incident::to_log_message() const{
+	return (is_cleared ? "Cleared " : "Incident ") + event.type.to_string_value() + ": " + event.module + " -> " + event.code_type + " -> " + event.code;
 }
 
 

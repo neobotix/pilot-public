@@ -10,5 +10,6 @@ class Incident extends Event {
 	
 	
 	static Incident* create_ex(long time, event_t event, int level, vnx.Object info, bool is_active, int timeout_ms = 3000);
-	
+
+	string to_log_message() const;
 }
