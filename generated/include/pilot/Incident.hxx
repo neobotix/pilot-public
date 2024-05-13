@@ -33,6 +33,7 @@ public:
 	const vnx::TypeCode* get_type_code() const override;
 	
 	static std::shared_ptr<const ::pilot::Incident> create_ex(const int64_t& time = 0, const ::pilot::event_t& event = ::pilot::event_t(), const int32_t& level = 0, const ::vnx::Object& info = ::vnx::Object(), const vnx::bool_t& is_active = 0, const int32_t& timeout_ms = 3000);
+	virtual std::string to_log_message() const;
 	
 	static std::shared_ptr<Incident> create();
 	std::shared_ptr<vnx::Value> clone() const override;
