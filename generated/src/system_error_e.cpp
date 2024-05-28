@@ -11,7 +11,7 @@ namespace pilot {
 
 
 const vnx::Hash64 system_error_e::VNX_TYPE_HASH(0x5c6737d8cdf39bfbull);
-const vnx::Hash64 system_error_e::VNX_CODE_HASH(0xb9715ad6e4ceb45aull);
+const vnx::Hash64 system_error_e::VNX_CODE_HASH(0xb70a978562b0283ull);
 
 vnx::Hash64 system_error_e::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -53,6 +53,7 @@ vnx::bool_t system_error_e::is_valid() const {
 		case MOTOR_ERROR: return true;
 		case POWER_RELAY_ERROR: return true;
 		case SAFETY_RELAY_ERROR: return true;
+		case SCANNER_DIRTY: return true;
 		case STANDSTILL_VIOLATION: return true;
 	}
 	return false;
@@ -70,6 +71,7 @@ std::string system_error_e::to_string() const {
 		case MOTOR_ERROR: return "\"MOTOR_ERROR\"";
 		case POWER_RELAY_ERROR: return "\"POWER_RELAY_ERROR\"";
 		case SAFETY_RELAY_ERROR: return "\"SAFETY_RELAY_ERROR\"";
+		case SCANNER_DIRTY: return "\"SCANNER_DIRTY\"";
 		case STANDSTILL_VIOLATION: return "\"STANDSTILL_VIOLATION\"";
 	}
 	return std::to_string(value);
@@ -87,6 +89,7 @@ std::string system_error_e::to_string_value() const {
 		case MOTOR_ERROR: return "MOTOR_ERROR";
 		case POWER_RELAY_ERROR: return "POWER_RELAY_ERROR";
 		case SAFETY_RELAY_ERROR: return "SAFETY_RELAY_ERROR";
+		case SCANNER_DIRTY: return "SCANNER_DIRTY";
 		case STANDSTILL_VIOLATION: return "STANDSTILL_VIOLATION";
 	}
 	return std::to_string(value);
@@ -104,6 +107,7 @@ std::string system_error_e::to_string_value_full() const {
 		case MOTOR_ERROR: return "pilot.system_error_e.MOTOR_ERROR";
 		case POWER_RELAY_ERROR: return "pilot.system_error_e.POWER_RELAY_ERROR";
 		case SAFETY_RELAY_ERROR: return "pilot.system_error_e.SAFETY_RELAY_ERROR";
+		case SCANNER_DIRTY: return "pilot.system_error_e.SCANNER_DIRTY";
 		case STANDSTILL_VIOLATION: return "pilot.system_error_e.STANDSTILL_VIOLATION";
 	}
 	return std::to_string(value);
@@ -129,6 +133,7 @@ void system_error_e::from_string_value(const std::string& _name) {
 		else if(_name == "MOTOR_ERROR") value = MOTOR_ERROR;
 		else if(_name == "POWER_RELAY_ERROR") value = POWER_RELAY_ERROR;
 		else if(_name == "SAFETY_RELAY_ERROR") value = SAFETY_RELAY_ERROR;
+		else if(_name == "SCANNER_DIRTY") value = SCANNER_DIRTY;
 		else if(_name == "STANDSTILL_VIOLATION") value = STANDSTILL_VIOLATION;
 		else value = enum_t(vnx::hash64(_name));
 	} else {
@@ -149,6 +154,7 @@ void system_error_e::accept(vnx::Visitor& _visitor) const {
 		case MOTOR_ERROR: _name = "MOTOR_ERROR"; break;
 		case POWER_RELAY_ERROR: _name = "POWER_RELAY_ERROR"; break;
 		case SAFETY_RELAY_ERROR: _name = "SAFETY_RELAY_ERROR"; break;
+		case SCANNER_DIRTY: _name = "SCANNER_DIRTY"; break;
 		case STANDSTILL_VIOLATION: _name = "STANDSTILL_VIOLATION"; break;
 	}
 	_visitor.enum_value(value, _name);
@@ -166,6 +172,7 @@ void system_error_e::write(std::ostream& _out) const {
 		case MOTOR_ERROR: _out << "\"MOTOR_ERROR\""; break;
 		case POWER_RELAY_ERROR: _out << "\"POWER_RELAY_ERROR\""; break;
 		case SAFETY_RELAY_ERROR: _out << "\"SAFETY_RELAY_ERROR\""; break;
+		case SCANNER_DIRTY: _out << "\"SCANNER_DIRTY\""; break;
 		case STANDSTILL_VIOLATION: _out << "\"STANDSTILL_VIOLATION\""; break;
 		default: _out << value;
 	}
@@ -229,7 +236,7 @@ std::shared_ptr<vnx::TypeCode> system_error_e::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.system_error_e";
 	type_code->type_hash = vnx::Hash64(0x5c6737d8cdf39bfbull);
-	type_code->code_hash = vnx::Hash64(0xb9715ad6e4ceb45aull);
+	type_code->code_hash = vnx::Hash64(0xb70a978562b0283ull);
 	type_code->is_native = true;
 	type_code->is_enum = true;
 	type_code->native_size = sizeof(::pilot::system_error_e);
@@ -251,6 +258,7 @@ std::shared_ptr<vnx::TypeCode> system_error_e::static_create_type_code() {
 	type_code->enum_map[1076149855] = "MOTOR_ERROR";
 	type_code->enum_map[3673071187] = "POWER_RELAY_ERROR";
 	type_code->enum_map[3616417200] = "SAFETY_RELAY_ERROR";
+	type_code->enum_map[3583018013] = "SCANNER_DIRTY";
 	type_code->enum_map[612537943] = "STANDSTILL_VIOLATION";
 	type_code->build();
 	return type_code;
