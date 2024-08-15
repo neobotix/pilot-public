@@ -1,0 +1,9 @@
+package pilot;
+
+enum safety_mode_e{
+	NONE,
+	APPROACHING,
+	DEPARTING,
+	WORKING,
+	HANDLING,
+}

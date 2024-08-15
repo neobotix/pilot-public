@@ -1,6 +1,9 @@
 package pilot;
 
 interface SafetyInterface{
+	@Permission(permission_e.SAFETY_MODE_CONTROL)
+	void set_safety_mode(safety_mode_e mode, uchar station_id=0);
+
 	@Permission(permission_e.SAFETY_FIELD_CONTROL)
 	void select_safety_field(uint field_id);
 }
