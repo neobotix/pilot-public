@@ -5,6 +5,9 @@
 #include <pilot/SafetyInterface.hxx>
 #include <pilot/SafetyInterface_select_safety_field.hxx>
 #include <pilot/SafetyInterface_select_safety_field_return.hxx>
+#include <pilot/SafetyInterface_set_safety_mode.hxx>
+#include <pilot/SafetyInterface_set_safety_mode_return.hxx>
+#include <pilot/safety_mode_e.hxx>
 
 #include <vnx/vnx.h>
 

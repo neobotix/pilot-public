@@ -45,6 +45,8 @@
 #include <pilot/RelayBoardV3Data.hxx>
 #include <pilot/SafetyInterface_select_safety_field.hxx>
 #include <pilot/SafetyInterface_select_safety_field_return.hxx>
+#include <pilot/SafetyInterface_set_safety_mode.hxx>
+#include <pilot/SafetyInterface_set_safety_mode_return.hxx>
 #include <pilot/SafetyState.hxx>
 #include <pilot/SystemState.hxx>
 #include <pilot/USBoardData.hxx>
@@ -60,6 +62,7 @@
 #include <pilot/permission_e.hxx>
 #include <pilot/power_system_type_e.hxx>
 #include <pilot/safety_code_e.hxx>
+#include <pilot/safety_mode_e.hxx>
 #include <pilot/system_error_e.hxx>
 
 #include <pilot/package.hxx>
@@ -421,6 +424,22 @@ void type<::pilot::SafetyInterface_select_safety_field_return>::create_dynamic_c
 	code.push_back(CODE_OBJECT);
 }
 
+void type<::pilot::SafetyInterface_set_safety_mode>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::pilot::SafetyInterface_set_safety_mode());
+}
+
+void type<::pilot::SafetyInterface_set_safety_mode>::create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::SafetyInterface_set_safety_mode& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
+void type<::pilot::SafetyInterface_set_safety_mode_return>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::pilot::SafetyInterface_set_safety_mode_return());
+}
+
+void type<::pilot::SafetyInterface_set_safety_mode_return>::create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::SafetyInterface_set_safety_mode_return& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::pilot::SafetyState>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::pilot::SafetyState());
 }
@@ -581,6 +600,18 @@ void type<::pilot::safety_code_e>::create_dynamic_code(std::vector<uint16_t>& co
 	}
 }
 
+void type<::pilot::safety_mode_e>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::pilot::safety_mode_e());
+}
+
+void type<::pilot::safety_mode_e>::create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::safety_mode_e& value, bool special) {
+	if(!special || value.is_valid()) {
+		code.push_back(CODE_STRING);
+	} else {
+		code.push_back(CODE_UINT32);
+	}
+}
+
 void type<::pilot::system_error_e>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::pilot::system_error_e());
 }
@@ -645,6 +676,8 @@ static void register_all_types() {
 	vnx::register_type_code(::pilot::RelayBoardV3Data::static_create_type_code());
 	vnx::register_type_code(::pilot::SafetyInterface_select_safety_field::static_create_type_code());
 	vnx::register_type_code(::pilot::SafetyInterface_select_safety_field_return::static_create_type_code());
+	vnx::register_type_code(::pilot::SafetyInterface_set_safety_mode::static_create_type_code());
+	vnx::register_type_code(::pilot::SafetyInterface_set_safety_mode_return::static_create_type_code());
 	vnx::register_type_code(::pilot::SafetyState::static_create_type_code());
 	vnx::register_type_code(::pilot::SystemState::static_create_type_code());
 	vnx::register_type_code(::pilot::USBoardData::static_create_type_code());
@@ -660,6 +693,7 @@ static void register_all_types() {
 	vnx::register_type_code(::pilot::permission_e::static_create_type_code());
 	vnx::register_type_code(::pilot::power_system_type_e::static_create_type_code());
 	vnx::register_type_code(::pilot::safety_code_e::static_create_type_code());
+	vnx::register_type_code(::pilot::safety_mode_e::static_create_type_code());
 	vnx::register_type_code(::pilot::system_error_e::static_create_type_code());
 }
 
@@ -713,6 +747,8 @@ const vnx::TypeCode* const vnx_native_type_code_RelayBoardData = vnx::get_type_c
 const vnx::TypeCode* const vnx_native_type_code_RelayBoardV3Data = vnx::get_type_code(vnx::Hash64(0x9520c728da2f4f2full));
 const vnx::TypeCode* const vnx_native_type_code_SafetyInterface_select_safety_field = vnx::get_type_code(vnx::Hash64(0xc411be3b6bf47152ull));
 const vnx::TypeCode* const vnx_native_type_code_SafetyInterface_select_safety_field_return = vnx::get_type_code(vnx::Hash64(0xd81ee9df65045d9dull));
+const vnx::TypeCode* const vnx_native_type_code_SafetyInterface_set_safety_mode = vnx::get_type_code(vnx::Hash64(0x65842a00915e7e92ull));
+const vnx::TypeCode* const vnx_native_type_code_SafetyInterface_set_safety_mode_return = vnx::get_type_code(vnx::Hash64(0x33ef41a5984fa562ull));
 const vnx::TypeCode* const vnx_native_type_code_SafetyState = vnx::get_type_code(vnx::Hash64(0xfe0a52079ba87c3full));
 const vnx::TypeCode* const vnx_native_type_code_SystemState = vnx::get_type_code(vnx::Hash64(0x6581fb0fdb31ddaeull));
 const vnx::TypeCode* const vnx_native_type_code_USBoardData = vnx::get_type_code(vnx::Hash64(0x4850604e2930c0a0ull));
@@ -728,6 +764,7 @@ const vnx::TypeCode* const vnx_native_type_code_led_color_e = vnx::get_type_code
 const vnx::TypeCode* const vnx_native_type_code_permission_e = vnx::get_type_code(vnx::Hash64(0x64db946d72fb3e6eull));
 const vnx::TypeCode* const vnx_native_type_code_power_system_type_e = vnx::get_type_code(vnx::Hash64(0xb3331aac4fcf37a0ull));
 const vnx::TypeCode* const vnx_native_type_code_safety_code_e = vnx::get_type_code(vnx::Hash64(0x3e30cd770f8f7239ull));
+const vnx::TypeCode* const vnx_native_type_code_safety_mode_e = vnx::get_type_code(vnx::Hash64(0xc065693342633f12ull));
 const vnx::TypeCode* const vnx_native_type_code_system_error_e = vnx::get_type_code(vnx::Hash64(0x5c6737d8cdf39bfbull));
 
 } // namespace pilot

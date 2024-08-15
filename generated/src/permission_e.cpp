@@ -11,7 +11,7 @@ namespace pilot {
 
 
 const vnx::Hash64 permission_e::VNX_TYPE_HASH(0x64db946d72fb3e6eull);
-const vnx::Hash64 permission_e::VNX_CODE_HASH(0x2735b06b8851c692ull);
+const vnx::Hash64 permission_e::VNX_CODE_HASH(0x9a741e57a44d3c2ull);
 
 vnx::Hash64 permission_e::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -56,6 +56,7 @@ vnx::bool_t permission_e::is_valid() const {
 		case RELAY_CONTROL: return true;
 		case REMOTE_CONTROL: return true;
 		case SAFETY_FIELD_CONTROL: return true;
+		case SAFETY_MODE_CONTROL: return true;
 		case UPLOAD_SCRIPT: return true;
 	}
 	return false;
@@ -76,6 +77,7 @@ std::string permission_e::to_string() const {
 		case RELAY_CONTROL: return "\"RELAY_CONTROL\"";
 		case REMOTE_CONTROL: return "\"REMOTE_CONTROL\"";
 		case SAFETY_FIELD_CONTROL: return "\"SAFETY_FIELD_CONTROL\"";
+		case SAFETY_MODE_CONTROL: return "\"SAFETY_MODE_CONTROL\"";
 		case UPLOAD_SCRIPT: return "\"UPLOAD_SCRIPT\"";
 	}
 	return std::to_string(value);
@@ -96,6 +98,7 @@ std::string permission_e::to_string_value() const {
 		case RELAY_CONTROL: return "RELAY_CONTROL";
 		case REMOTE_CONTROL: return "REMOTE_CONTROL";
 		case SAFETY_FIELD_CONTROL: return "SAFETY_FIELD_CONTROL";
+		case SAFETY_MODE_CONTROL: return "SAFETY_MODE_CONTROL";
 		case UPLOAD_SCRIPT: return "UPLOAD_SCRIPT";
 	}
 	return std::to_string(value);
@@ -116,6 +119,7 @@ std::string permission_e::to_string_value_full() const {
 		case RELAY_CONTROL: return "pilot.permission_e.RELAY_CONTROL";
 		case REMOTE_CONTROL: return "pilot.permission_e.REMOTE_CONTROL";
 		case SAFETY_FIELD_CONTROL: return "pilot.permission_e.SAFETY_FIELD_CONTROL";
+		case SAFETY_MODE_CONTROL: return "pilot.permission_e.SAFETY_MODE_CONTROL";
 		case UPLOAD_SCRIPT: return "pilot.permission_e.UPLOAD_SCRIPT";
 	}
 	return std::to_string(value);
@@ -144,6 +148,7 @@ void permission_e::from_string_value(const std::string& _name) {
 		else if(_name == "RELAY_CONTROL") value = RELAY_CONTROL;
 		else if(_name == "REMOTE_CONTROL") value = REMOTE_CONTROL;
 		else if(_name == "SAFETY_FIELD_CONTROL") value = SAFETY_FIELD_CONTROL;
+		else if(_name == "SAFETY_MODE_CONTROL") value = SAFETY_MODE_CONTROL;
 		else if(_name == "UPLOAD_SCRIPT") value = UPLOAD_SCRIPT;
 		else value = enum_t(vnx::hash64(_name));
 	} else {
@@ -167,6 +172,7 @@ void permission_e::accept(vnx::Visitor& _visitor) const {
 		case RELAY_CONTROL: _name = "RELAY_CONTROL"; break;
 		case REMOTE_CONTROL: _name = "REMOTE_CONTROL"; break;
 		case SAFETY_FIELD_CONTROL: _name = "SAFETY_FIELD_CONTROL"; break;
+		case SAFETY_MODE_CONTROL: _name = "SAFETY_MODE_CONTROL"; break;
 		case UPLOAD_SCRIPT: _name = "UPLOAD_SCRIPT"; break;
 	}
 	_visitor.enum_value(value, _name);
@@ -187,6 +193,7 @@ void permission_e::write(std::ostream& _out) const {
 		case RELAY_CONTROL: _out << "\"RELAY_CONTROL\""; break;
 		case REMOTE_CONTROL: _out << "\"REMOTE_CONTROL\""; break;
 		case SAFETY_FIELD_CONTROL: _out << "\"SAFETY_FIELD_CONTROL\""; break;
+		case SAFETY_MODE_CONTROL: _out << "\"SAFETY_MODE_CONTROL\""; break;
 		case UPLOAD_SCRIPT: _out << "\"UPLOAD_SCRIPT\""; break;
 		default: _out << value;
 	}
@@ -250,7 +257,7 @@ std::shared_ptr<vnx::TypeCode> permission_e::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.permission_e";
 	type_code->type_hash = vnx::Hash64(0x64db946d72fb3e6eull);
-	type_code->code_hash = vnx::Hash64(0x2735b06b8851c692ull);
+	type_code->code_hash = vnx::Hash64(0x9a741e57a44d3c2ull);
 	type_code->is_native = true;
 	type_code->is_enum = true;
 	type_code->native_size = sizeof(::pilot::permission_e);
@@ -275,6 +282,7 @@ std::shared_ptr<vnx::TypeCode> permission_e::static_create_type_code() {
 	type_code->enum_map[260314171] = "RELAY_CONTROL";
 	type_code->enum_map[2484253923] = "REMOTE_CONTROL";
 	type_code->enum_map[4096238303] = "SAFETY_FIELD_CONTROL";
+	type_code->enum_map[472492213] = "SAFETY_MODE_CONTROL";
 	type_code->enum_map[2321068984] = "UPLOAD_SCRIPT";
 	type_code->build();
 	return type_code;

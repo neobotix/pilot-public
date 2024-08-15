@@ -5,6 +5,7 @@
 #define INCLUDE_pilot_SafetyInterface_ASYNC_CLIENT_HXX_
 
 #include <vnx/AsyncClient.h>
+#include <pilot/safety_mode_e.hxx>
 
 
 namespace pilot {
@@ -14,6 +15,10 @@ public:
 	SafetyInterfaceAsyncClient(const std::string& service_name);
 	
 	SafetyInterfaceAsyncClient(vnx::Hash64 service_addr);
+	
+	uint64_t set_safety_mode(const ::pilot::safety_mode_e& mode = ::pilot::safety_mode_e(), const uint8_t& station_id = 0, 
+			const std::function<void()>& _callback = std::function<void()>(),
+			const std::function<void(const vnx::exception&)>& _error_callback = std::function<void(const vnx::exception&)>());
 	
 	uint64_t select_safety_field(const uint32_t& field_id = 0, 
 			const std::function<void()>& _callback = std::function<void()>(),
@@ -25,6 +30,7 @@ protected:
 	int32_t vnx_callback_switch(uint64_t _request_id, std::shared_ptr<const vnx::Value> _value) override;
 	
 private:
+	std::unordered_map<uint64_t, std::pair<std::function<void()>, std::function<void(const vnx::exception&)>>> vnx_queue_set_safety_mode;
 	std::unordered_map<uint64_t, std::pair<std::function<void()>, std::function<void(const vnx::exception&)>>> vnx_queue_select_safety_field;
 	
 };

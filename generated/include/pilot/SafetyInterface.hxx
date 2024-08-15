@@ -6,6 +6,7 @@
 
 #include <vnx/Type.h>
 #include <pilot/package.hxx>
+#include <pilot/safety_mode_e.hxx>
 
 
 namespace pilot {

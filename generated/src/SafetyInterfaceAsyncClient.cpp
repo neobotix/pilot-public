@@ -5,6 +5,9 @@
 #include <pilot/SafetyInterfaceAsyncClient.hxx>
 #include <pilot/SafetyInterface_select_safety_field.hxx>
 #include <pilot/SafetyInterface_select_safety_field_return.hxx>
+#include <pilot/SafetyInterface_set_safety_mode.hxx>
+#include <pilot/SafetyInterface_set_safety_mode_return.hxx>
+#include <pilot/safety_mode_e.hxx>
 
 #include <vnx/Generic.hxx>
 #include <vnx/vnx.h>
@@ -22,13 +25,27 @@ SafetyInterfaceAsyncClient::SafetyInterfaceAsyncClient(vnx::Hash64 service_addr)
 {
 }
 
+uint64_t SafetyInterfaceAsyncClient::set_safety_mode(const ::pilot::safety_mode_e& mode, const uint8_t& station_id, const std::function<void()>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
+	auto _method = ::pilot::SafetyInterface_set_safety_mode::create();
+	_method->mode = mode;
+	_method->station_id = station_id;
+	const auto _request_id = ++vnx_next_id;
+	{
+		std::lock_guard<std::mutex> _lock(vnx_mutex);
+		vnx_pending[_request_id] = 0;
+		vnx_queue_set_safety_mode[_request_id] = std::make_pair(_callback, _error_callback);
+	}
+	vnx_request(_method, _request_id);
+	return _request_id;
+}
+
 uint64_t SafetyInterfaceAsyncClient::select_safety_field(const uint32_t& field_id, const std::function<void()>& _callback, const std::function<void(const vnx::exception&)>& _error_callback) {
 	auto _method = ::pilot::SafetyInterface_select_safety_field::create();
 	_method->field_id = field_id;
 	const auto _request_id = ++vnx_next_id;
 	{
 		std::lock_guard<std::mutex> _lock(vnx_mutex);
-		vnx_pending[_request_id] = 0;
+		vnx_pending[_request_id] = 1;
 		vnx_queue_select_safety_field[_request_id] = std::make_pair(_callback, _error_callback);
 	}
 	vnx_request(_method, _request_id);
@@ -45,6 +62,18 @@ int32_t SafetyInterfaceAsyncClient::vnx_purge_request(uint64_t _request_id, cons
 	vnx_pending.erase(_iter);
 	switch(_index) {
 		case 0: {
+			const auto _iter = vnx_queue_set_safety_mode.find(_request_id);
+			if(_iter != vnx_queue_set_safety_mode.end()) {
+				const auto _callback = std::move(_iter->second.second);
+				vnx_queue_set_safety_mode.erase(_iter);
+				_lock.unlock();
+				if(_callback) {
+					_callback(_ex);
+				}
+			}
+			break;
+		}
+		case 1: {
 			const auto _iter = vnx_queue_select_safety_field.find(_request_id);
 			if(_iter != vnx_queue_select_safety_field.end()) {
 				const auto _callback = std::move(_iter->second.second);
@@ -70,6 +99,19 @@ int32_t SafetyInterfaceAsyncClient::vnx_callback_switch(uint64_t _request_id, st
 	vnx_pending.erase(_iter);
 	switch(_index) {
 		case 0: {
+			const auto _iter = vnx_queue_set_safety_mode.find(_request_id);
+			if(_iter == vnx_queue_set_safety_mode.end()) {
+				throw std::runtime_error("SafetyInterfaceAsyncClient: callback not found");
+			}
+			const auto _callback = std::move(_iter->second.first);
+			vnx_queue_set_safety_mode.erase(_iter);
+			_lock.unlock();
+			if(_callback) {
+				_callback();
+			}
+			break;
+		}
+		case 1: {
 			const auto _iter = vnx_queue_select_safety_field.find(_request_id);
 			if(_iter == vnx_queue_select_safety_field.end()) {
 				throw std::runtime_error("SafetyInterfaceAsyncClient: callback not found");

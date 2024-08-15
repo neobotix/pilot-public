@@ -5,6 +5,9 @@
 #include <pilot/SafetyInterfaceClient.hxx>
 #include <pilot/SafetyInterface_select_safety_field.hxx>
 #include <pilot/SafetyInterface_select_safety_field_return.hxx>
+#include <pilot/SafetyInterface_set_safety_mode.hxx>
+#include <pilot/SafetyInterface_set_safety_mode_return.hxx>
+#include <pilot/safety_mode_e.hxx>
 
 #include <vnx/Generic.hxx>
 #include <vnx/vnx.h>
@@ -20,6 +23,20 @@ SafetyInterfaceClient::SafetyInterfaceClient(const std::string& service_name)
 SafetyInterfaceClient::SafetyInterfaceClient(vnx::Hash64 service_addr)
 	:	Client::Client(service_addr)
 {
+}
+
+void SafetyInterfaceClient::set_safety_mode(const ::pilot::safety_mode_e& mode, const uint8_t& station_id) {
+	auto _method = ::pilot::SafetyInterface_set_safety_mode::create();
+	_method->mode = mode;
+	_method->station_id = station_id;
+	vnx_request(_method, false);
+}
+
+void SafetyInterfaceClient::set_safety_mode_async(const ::pilot::safety_mode_e& mode, const uint8_t& station_id) {
+	auto _method = ::pilot::SafetyInterface_set_safety_mode::create();
+	_method->mode = mode;
+	_method->station_id = station_id;
+	vnx_request(_method, true);
 }
 
 void SafetyInterfaceClient::select_safety_field(const uint32_t& field_id) {

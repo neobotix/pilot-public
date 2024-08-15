@@ -5,6 +5,7 @@
 #define INCLUDE_pilot_SafetyInterface_CLIENT_HXX_
 
 #include <vnx/Client.h>
+#include <pilot/safety_mode_e.hxx>
 
 
 namespace pilot {
@@ -14,6 +15,10 @@ public:
 	SafetyInterfaceClient(const std::string& service_name);
 	
 	SafetyInterfaceClient(vnx::Hash64 service_addr);
+	
+	void set_safety_mode(const ::pilot::safety_mode_e& mode = ::pilot::safety_mode_e(), const uint8_t& station_id = 0);
+	
+	void set_safety_mode_async(const ::pilot::safety_mode_e& mode = ::pilot::safety_mode_e(), const uint8_t& station_id = 0);
 	
 	void select_safety_field(const uint32_t& field_id = 0);
 	

@@ -59,6 +59,8 @@ class RelayBoardV3Data;
 class SafetyInterface;
 class SafetyInterface_select_safety_field;
 class SafetyInterface_select_safety_field_return;
+class SafetyInterface_set_safety_mode;
+class SafetyInterface_set_safety_mode_return;
 class SafetyState;
 class SystemState;
 class USBoardData;
@@ -74,6 +76,7 @@ struct led_color_e;
 struct permission_e;
 struct power_system_type_e;
 struct safety_code_e;
+struct safety_mode_e;
 struct system_error_e;
 
 extern const vnx::TypeCode* const vnx_native_type_code_BatteryState; ///< \private
@@ -120,6 +123,8 @@ extern const vnx::TypeCode* const vnx_native_type_code_RelayBoardData; ///< \pri
 extern const vnx::TypeCode* const vnx_native_type_code_RelayBoardV3Data; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_SafetyInterface_select_safety_field; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_SafetyInterface_select_safety_field_return; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_SafetyInterface_set_safety_mode; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_SafetyInterface_set_safety_mode_return; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_SafetyState; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_SystemState; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_USBoardData; ///< \private
@@ -135,6 +140,7 @@ extern const vnx::TypeCode* const vnx_native_type_code_led_color_e; ///< \privat
 extern const vnx::TypeCode* const vnx_native_type_code_permission_e; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_power_system_type_e; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_safety_code_e; ///< \private
+extern const vnx::TypeCode* const vnx_native_type_code_safety_mode_e; ///< \private
 extern const vnx::TypeCode* const vnx_native_type_code_system_error_e; ///< \private
 
 } // namespace pilot
@@ -189,6 +195,8 @@ void read(TypeInput& in, ::pilot::RelayBoardV3Data& value, const TypeCode* type_
 void read(TypeInput& in, ::pilot::SafetyInterface& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::pilot::SafetyInterface_select_safety_field& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::pilot::SafetyInterface_select_safety_field_return& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void read(TypeInput& in, ::pilot::SafetyInterface_set_safety_mode& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void read(TypeInput& in, ::pilot::SafetyInterface_set_safety_mode_return& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::pilot::SafetyState& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::pilot::SystemState& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::pilot::USBoardData& value, const TypeCode* type_code, const uint16_t* code); ///< \private
@@ -204,6 +212,7 @@ void read(TypeInput& in, ::pilot::led_color_e& value, const TypeCode* type_code,
 void read(TypeInput& in, ::pilot::permission_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::pilot::power_system_type_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::pilot::safety_code_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void read(TypeInput& in, ::pilot::safety_mode_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void read(TypeInput& in, ::pilot::system_error_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 
 void write(TypeOutput& out, const ::pilot::BatteryState& value, const TypeCode* type_code, const uint16_t* code); ///< \private
@@ -253,6 +262,8 @@ void write(TypeOutput& out, const ::pilot::RelayBoardV3Data& value, const TypeCo
 void write(TypeOutput& out, const ::pilot::SafetyInterface& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::pilot::SafetyInterface_select_safety_field& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::pilot::SafetyInterface_select_safety_field_return& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void write(TypeOutput& out, const ::pilot::SafetyInterface_set_safety_mode& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void write(TypeOutput& out, const ::pilot::SafetyInterface_set_safety_mode_return& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::pilot::SafetyState& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::pilot::SystemState& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::pilot::USBoardData& value, const TypeCode* type_code, const uint16_t* code); ///< \private
@@ -268,6 +279,7 @@ void write(TypeOutput& out, const ::pilot::led_color_e& value, const TypeCode* t
 void write(TypeOutput& out, const ::pilot::permission_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::pilot::power_system_type_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::pilot::safety_code_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
+void write(TypeOutput& out, const ::pilot::safety_mode_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 void write(TypeOutput& out, const ::pilot::system_error_e& value, const TypeCode* type_code, const uint16_t* code); ///< \private
 
 void read(std::istream& in, ::pilot::BatteryState& value); ///< \private
@@ -317,6 +329,8 @@ void read(std::istream& in, ::pilot::RelayBoardV3Data& value); ///< \private
 void read(std::istream& in, ::pilot::SafetyInterface& value); ///< \private
 void read(std::istream& in, ::pilot::SafetyInterface_select_safety_field& value); ///< \private
 void read(std::istream& in, ::pilot::SafetyInterface_select_safety_field_return& value); ///< \private
+void read(std::istream& in, ::pilot::SafetyInterface_set_safety_mode& value); ///< \private
+void read(std::istream& in, ::pilot::SafetyInterface_set_safety_mode_return& value); ///< \private
 void read(std::istream& in, ::pilot::SafetyState& value); ///< \private
 void read(std::istream& in, ::pilot::SystemState& value); ///< \private
 void read(std::istream& in, ::pilot::USBoardData& value); ///< \private
@@ -332,6 +346,7 @@ void read(std::istream& in, ::pilot::led_color_e& value); ///< \private
 void read(std::istream& in, ::pilot::permission_e& value); ///< \private
 void read(std::istream& in, ::pilot::power_system_type_e& value); ///< \private
 void read(std::istream& in, ::pilot::safety_code_e& value); ///< \private
+void read(std::istream& in, ::pilot::safety_mode_e& value); ///< \private
 void read(std::istream& in, ::pilot::system_error_e& value); ///< \private
 
 void write(std::ostream& out, const ::pilot::BatteryState& value); ///< \private
@@ -381,6 +396,8 @@ void write(std::ostream& out, const ::pilot::RelayBoardV3Data& value); ///< \pri
 void write(std::ostream& out, const ::pilot::SafetyInterface& value); ///< \private
 void write(std::ostream& out, const ::pilot::SafetyInterface_select_safety_field& value); ///< \private
 void write(std::ostream& out, const ::pilot::SafetyInterface_select_safety_field_return& value); ///< \private
+void write(std::ostream& out, const ::pilot::SafetyInterface_set_safety_mode& value); ///< \private
+void write(std::ostream& out, const ::pilot::SafetyInterface_set_safety_mode_return& value); ///< \private
 void write(std::ostream& out, const ::pilot::SafetyState& value); ///< \private
 void write(std::ostream& out, const ::pilot::SystemState& value); ///< \private
 void write(std::ostream& out, const ::pilot::USBoardData& value); ///< \private
@@ -396,6 +413,7 @@ void write(std::ostream& out, const ::pilot::led_color_e& value); ///< \private
 void write(std::ostream& out, const ::pilot::permission_e& value); ///< \private
 void write(std::ostream& out, const ::pilot::power_system_type_e& value); ///< \private
 void write(std::ostream& out, const ::pilot::safety_code_e& value); ///< \private
+void write(std::ostream& out, const ::pilot::safety_mode_e& value); ///< \private
 void write(std::ostream& out, const ::pilot::system_error_e& value); ///< \private
 
 void accept(Visitor& visitor, const ::pilot::BatteryState& value); ///< \private
@@ -445,6 +463,8 @@ void accept(Visitor& visitor, const ::pilot::RelayBoardV3Data& value); ///< \pri
 void accept(Visitor& visitor, const ::pilot::SafetyInterface& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::SafetyInterface_select_safety_field& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::SafetyInterface_select_safety_field_return& value); ///< \private
+void accept(Visitor& visitor, const ::pilot::SafetyInterface_set_safety_mode& value); ///< \private
+void accept(Visitor& visitor, const ::pilot::SafetyInterface_set_safety_mode_return& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::SafetyState& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::SystemState& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::USBoardData& value); ///< \private
@@ -460,6 +480,7 @@ void accept(Visitor& visitor, const ::pilot::led_color_e& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::permission_e& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::power_system_type_e& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::safety_code_e& value); ///< \private
+void accept(Visitor& visitor, const ::pilot::safety_mode_e& value); ///< \private
 void accept(Visitor& visitor, const ::pilot::system_error_e& value); ///< \private
 
 /// \private
@@ -1492,6 +1513,50 @@ struct type<::pilot::SafetyInterface_select_safety_field_return> {
 
 /// \private
 template<>
+struct type<::pilot::SafetyInterface_set_safety_mode> {
+	void read(TypeInput& in, ::pilot::SafetyInterface_set_safety_mode& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::read(in, value, type_code, code);
+	}
+	void write(TypeOutput& out, const ::pilot::SafetyInterface_set_safety_mode& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::write(out, value, type_code, code);
+	}
+	void read(std::istream& in, ::pilot::SafetyInterface_set_safety_mode& value) {
+		vnx::read(in, value);
+	}
+	void write(std::ostream& out, const ::pilot::SafetyInterface_set_safety_mode& value) {
+		vnx::write(out, value);
+	}
+	void accept(Visitor& visitor, const ::pilot::SafetyInterface_set_safety_mode& value) {
+		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::SafetyInterface_set_safety_mode& value, bool special = false);
+};
+
+/// \private
+template<>
+struct type<::pilot::SafetyInterface_set_safety_mode_return> {
+	void read(TypeInput& in, ::pilot::SafetyInterface_set_safety_mode_return& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::read(in, value, type_code, code);
+	}
+	void write(TypeOutput& out, const ::pilot::SafetyInterface_set_safety_mode_return& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::write(out, value, type_code, code);
+	}
+	void read(std::istream& in, ::pilot::SafetyInterface_set_safety_mode_return& value) {
+		vnx::read(in, value);
+	}
+	void write(std::ostream& out, const ::pilot::SafetyInterface_set_safety_mode_return& value) {
+		vnx::write(out, value);
+	}
+	void accept(Visitor& visitor, const ::pilot::SafetyInterface_set_safety_mode_return& value) {
+		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::SafetyInterface_set_safety_mode_return& value, bool special = false);
+};
+
+/// \private
+template<>
 struct type<::pilot::SafetyState> {
 	void read(TypeInput& in, ::pilot::SafetyState& value, const TypeCode* type_code, const uint16_t* code) {
 		vnx::read(in, value, type_code, code);
@@ -1818,6 +1883,28 @@ struct type<::pilot::safety_code_e> {
 	}
 	void create_dynamic_code(std::vector<uint16_t>& code);
 	void create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::safety_code_e& value, bool special = false);
+};
+
+/// \private
+template<>
+struct type<::pilot::safety_mode_e> {
+	void read(TypeInput& in, ::pilot::safety_mode_e& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::read(in, value, type_code, code);
+	}
+	void write(TypeOutput& out, const ::pilot::safety_mode_e& value, const TypeCode* type_code, const uint16_t* code) {
+		vnx::write(out, value, type_code, code);
+	}
+	void read(std::istream& in, ::pilot::safety_mode_e& value) {
+		vnx::read(in, value);
+	}
+	void write(std::ostream& out, const ::pilot::safety_mode_e& value) {
+		vnx::write(out, value);
+	}
+	void accept(Visitor& visitor, const ::pilot::safety_mode_e& value) {
+		vnx::accept(visitor, value);
+	}
+	void create_dynamic_code(std::vector<uint16_t>& code);
+	void create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::safety_mode_e& value, bool special = false);
 };
 
 /// \private
