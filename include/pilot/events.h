@@ -5,8 +5,8 @@
  *      Author: mad
  */
 
-#ifndef INCLUDE_PILOT_UTILS_H_
-#define INCLUDE_PILOT_UTILS_H_
+#ifndef INCLUDE_PILOT_EVENTS_H_
+#define INCLUDE_PILOT_EVENTS_H_
 
 #include <pilot/Event.hxx>
 #include <pilot/Incident.hxx>
@@ -53,4 +53,4 @@ std::shared_ptr<Incident> create_incident(	const event_type_e& type,
 
 } // pilot
 
-#endif /* INCLUDE_PILOT_UTILS_H_ */
+#endif /* INCLUDE_PILOT_EVENTS_H_ */
