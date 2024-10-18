@@ -9,5 +9,8 @@ class SystemState {
 	bool is_shutdown;							// if true host system is asked to shut down
 	
 	bool is_initialized;						// if platform is initialized (hardware wise)
-	
+
+	bool is_operational;						// if platform is currently ready for movement
+
+	optional<bool> brakes_closed;
 }
