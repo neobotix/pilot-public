@@ -11,7 +11,7 @@ target_include_directories(pilot_kinematics_differential_interface PUBLIC
 )
 
 target_link_libraries(pilot_kinematics_differential_interface
-	pilot_kinematics
+	pilot_kinematics_interface
 )
 
 install(DIRECTORY generated/include/ DESTINATION include)

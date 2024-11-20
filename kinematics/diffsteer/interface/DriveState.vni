@@ -1,0 +1,13 @@
+package pilot.kinematics.diffsteer;
+
+class DriveState {
+	
+	long time;                                                 // POSIX timestamp [usec]
+	
+	pilot.kinematics.Position2Any drive_pos;
+	pilot.kinematics.PositionAny steer_pos;
+	
+	pilot.kinematics.Velocity2Any drive_vel;
+	pilot.kinematics.VelocityAny steer_vel;
+	
+}

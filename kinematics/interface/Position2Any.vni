@@ -1,0 +1,11 @@
+package pilot.kinematics;
+
+class Position2Any {
+
+	map<position_code_e, Position2> positions;
+	
+	Position2 get(position_code_e position) const;
+	void set(position_code_e position, Position2 value);
+	
+}
+

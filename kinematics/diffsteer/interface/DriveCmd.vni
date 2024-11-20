@@ -1,0 +1,9 @@
+package pilot.kinematics.diffsteer;
+
+class DriveCmd {
+
+	long time;                                                     // POSIX timestamp [usec]
+
+	pilot.kinematics.Velocity2Any drive_vel;                       // [rad/s]
+
+}
