@@ -11,7 +11,7 @@ namespace pilot {
 
 
 const vnx::Hash64 kinematic_type_e::VNX_TYPE_HASH(0xde9757131388e240ull);
-const vnx::Hash64 kinematic_type_e::VNX_CODE_HASH(0x468aaf116ff90d4cull);
+const vnx::Hash64 kinematic_type_e::VNX_CODE_HASH(0xc646d75fb5d9ff3full);
 
 vnx::Hash64 kinematic_type_e::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -45,6 +45,7 @@ vnx::bool_t kinematic_type_e::is_valid() const {
 	switch(value) {
 		case BICYCLE: return true;
 		case DIFFERENTIAL: return true;
+		case DIFFSTEER: return true;
 		case MECANUM: return true;
 		case NONE: return true;
 		case OMNIDRIVE: return true;
@@ -57,6 +58,7 @@ std::string kinematic_type_e::to_string() const {
 	switch(value) {
 		case BICYCLE: return "\"BICYCLE\"";
 		case DIFFERENTIAL: return "\"DIFFERENTIAL\"";
+		case DIFFSTEER: return "\"DIFFSTEER\"";
 		case MECANUM: return "\"MECANUM\"";
 		case NONE: return "\"NONE\"";
 		case OMNIDRIVE: return "\"OMNIDRIVE\"";
@@ -69,6 +71,7 @@ std::string kinematic_type_e::to_string_value() const {
 	switch(value) {
 		case BICYCLE: return "BICYCLE";
 		case DIFFERENTIAL: return "DIFFERENTIAL";
+		case DIFFSTEER: return "DIFFSTEER";
 		case MECANUM: return "MECANUM";
 		case NONE: return "NONE";
 		case OMNIDRIVE: return "OMNIDRIVE";
@@ -81,6 +84,7 @@ std::string kinematic_type_e::to_string_value_full() const {
 	switch(value) {
 		case BICYCLE: return "pilot.kinematic_type_e.BICYCLE";
 		case DIFFERENTIAL: return "pilot.kinematic_type_e.DIFFERENTIAL";
+		case DIFFSTEER: return "pilot.kinematic_type_e.DIFFSTEER";
 		case MECANUM: return "pilot.kinematic_type_e.MECANUM";
 		case NONE: return "pilot.kinematic_type_e.NONE";
 		case OMNIDRIVE: return "pilot.kinematic_type_e.OMNIDRIVE";
@@ -101,6 +105,7 @@ void kinematic_type_e::from_string_value(const std::string& _name) {
 	if(var.is_string()) {
 		if(_name == "BICYCLE") value = BICYCLE;
 		else if(_name == "DIFFERENTIAL") value = DIFFERENTIAL;
+		else if(_name == "DIFFSTEER") value = DIFFSTEER;
 		else if(_name == "MECANUM") value = MECANUM;
 		else if(_name == "NONE") value = NONE;
 		else if(_name == "OMNIDRIVE") value = OMNIDRIVE;
@@ -116,6 +121,7 @@ void kinematic_type_e::accept(vnx::Visitor& _visitor) const {
 	switch(value) {
 		case BICYCLE: _name = "BICYCLE"; break;
 		case DIFFERENTIAL: _name = "DIFFERENTIAL"; break;
+		case DIFFSTEER: _name = "DIFFSTEER"; break;
 		case MECANUM: _name = "MECANUM"; break;
 		case NONE: _name = "NONE"; break;
 		case OMNIDRIVE: _name = "OMNIDRIVE"; break;
@@ -128,6 +134,7 @@ void kinematic_type_e::write(std::ostream& _out) const {
 	switch(value) {
 		case BICYCLE: _out << "\"BICYCLE\""; break;
 		case DIFFERENTIAL: _out << "\"DIFFERENTIAL\""; break;
+		case DIFFSTEER: _out << "\"DIFFSTEER\""; break;
 		case MECANUM: _out << "\"MECANUM\""; break;
 		case NONE: _out << "\"NONE\""; break;
 		case OMNIDRIVE: _out << "\"OMNIDRIVE\""; break;
@@ -194,7 +201,7 @@ std::shared_ptr<vnx::TypeCode> kinematic_type_e::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.kinematic_type_e";
 	type_code->type_hash = vnx::Hash64(0xde9757131388e240ull);
-	type_code->code_hash = vnx::Hash64(0x468aaf116ff90d4cull);
+	type_code->code_hash = vnx::Hash64(0xc646d75fb5d9ff3full);
 	type_code->is_native = true;
 	type_code->is_enum = true;
 	type_code->native_size = sizeof(::pilot::kinematic_type_e);
@@ -208,6 +215,7 @@ std::shared_ptr<vnx::TypeCode> kinematic_type_e::static_create_type_code() {
 	}
 	type_code->enum_map[3167636936] = "BICYCLE";
 	type_code->enum_map[158731254] = "DIFFERENTIAL";
+	type_code->enum_map[2304325072] = "DIFFSTEER";
 	type_code->enum_map[1684201171] = "MECANUM";
 	type_code->enum_map[738838069] = "NONE";
 	type_code->enum_map[3296288869] = "OMNIDRIVE";

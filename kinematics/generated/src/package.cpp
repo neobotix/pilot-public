@@ -4,6 +4,7 @@
 #include <pilot/kinematics/KinematicsState.hxx>
 #include <pilot/kinematics/Position1.hxx>
 #include <pilot/kinematics/Position2.hxx>
+#include <pilot/kinematics/Position2Any.hxx>
 #include <pilot/kinematics/Position4.hxx>
 #include <pilot/kinematics/PositionAny.hxx>
 #include <pilot/kinematics/Torque1.hxx>
@@ -12,10 +13,10 @@
 #include <pilot/kinematics/TorqueAny.hxx>
 #include <pilot/kinematics/Velocity1.hxx>
 #include <pilot/kinematics/Velocity2.hxx>
+#include <pilot/kinematics/Velocity2Any.hxx>
 #include <pilot/kinematics/Velocity4.hxx>
 #include <pilot/kinematics/VelocityAny.hxx>
 #include <pilot/kinematics/position_code_e.hxx>
-#include <pilot/kinematics/steering_drive_t.hxx>
 
 #include <pilot/kinematics/package.hxx>
 #include <vnx/vnx.h>
@@ -45,6 +46,14 @@ void type<::pilot::kinematics::Position2>::create_dynamic_code(std::vector<uint1
 }
 
 void type<::pilot::kinematics::Position2>::create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::kinematics::Position2& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
+void type<::pilot::kinematics::Position2Any>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::pilot::kinematics::Position2Any());
+}
+
+void type<::pilot::kinematics::Position2Any>::create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::kinematics::Position2Any& value, bool special) {
 	code.push_back(CODE_OBJECT);
 }
 
@@ -112,6 +121,14 @@ void type<::pilot::kinematics::Velocity2>::create_dynamic_code(std::vector<uint1
 	code.push_back(CODE_OBJECT);
 }
 
+void type<::pilot::kinematics::Velocity2Any>::create_dynamic_code(std::vector<uint16_t>& code) {
+	create_dynamic_code(code, ::pilot::kinematics::Velocity2Any());
+}
+
+void type<::pilot::kinematics::Velocity2Any>::create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::kinematics::Velocity2Any& value, bool special) {
+	code.push_back(CODE_OBJECT);
+}
+
 void type<::pilot::kinematics::Velocity4>::create_dynamic_code(std::vector<uint16_t>& code) {
 	create_dynamic_code(code, ::pilot::kinematics::Velocity4());
 }
@@ -140,14 +157,6 @@ void type<::pilot::kinematics::position_code_e>::create_dynamic_code(std::vector
 	}
 }
 
-void type<::pilot::kinematics::steering_drive_t>::create_dynamic_code(std::vector<uint16_t>& code) {
-	create_dynamic_code(code, ::pilot::kinematics::steering_drive_t());
-}
-
-void type<::pilot::kinematics::steering_drive_t>::create_dynamic_code(std::vector<uint16_t>& code, const ::pilot::kinematics::steering_drive_t& value, bool special) {
-	code.push_back(CODE_OBJECT);
-}
-
 
 } // namespace vnx
 
@@ -160,6 +169,7 @@ static void register_all_types() {
 	vnx::register_type_code(::pilot::kinematics::KinematicsState::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::Position1::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::Position2::static_create_type_code());
+	vnx::register_type_code(::pilot::kinematics::Position2Any::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::Position4::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::PositionAny::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::Torque1::static_create_type_code());
@@ -168,10 +178,10 @@ static void register_all_types() {
 	vnx::register_type_code(::pilot::kinematics::TorqueAny::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::Velocity1::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::Velocity2::static_create_type_code());
+	vnx::register_type_code(::pilot::kinematics::Velocity2Any::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::Velocity4::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::VelocityAny::static_create_type_code());
 	vnx::register_type_code(::pilot::kinematics::position_code_e::static_create_type_code());
-	vnx::register_type_code(::pilot::kinematics::steering_drive_t::static_create_type_code());
 }
 
 static struct vnx_static_init {
@@ -183,6 +193,7 @@ static struct vnx_static_init {
 const vnx::TypeCode* const vnx_native_type_code_KinematicsState = vnx::get_type_code(vnx::Hash64(0xc5a4cc070d4176eaull));
 const vnx::TypeCode* const vnx_native_type_code_Position1 = vnx::get_type_code(vnx::Hash64(0x5e36cedb397a59e2ull));
 const vnx::TypeCode* const vnx_native_type_code_Position2 = vnx::get_type_code(vnx::Hash64(0x199cb432929da6d6ull));
+const vnx::TypeCode* const vnx_native_type_code_Position2Any = vnx::get_type_code(vnx::Hash64(0x4d280677b7ee30b3ull));
 const vnx::TypeCode* const vnx_native_type_code_Position4 = vnx::get_type_code(vnx::Hash64(0x96c841e1c55258beull));
 const vnx::TypeCode* const vnx_native_type_code_PositionAny = vnx::get_type_code(vnx::Hash64(0x64c651102a4df965ull));
 const vnx::TypeCode* const vnx_native_type_code_Torque1 = vnx::get_type_code(vnx::Hash64(0x5f639309e50c19bull));
@@ -191,10 +202,10 @@ const vnx::TypeCode* const vnx_native_type_code_Torque4 = vnx::get_type_code(vnx
 const vnx::TypeCode* const vnx_native_type_code_TorqueAny = vnx::get_type_code(vnx::Hash64(0x82865c1c229976a2ull));
 const vnx::TypeCode* const vnx_native_type_code_Velocity1 = vnx::get_type_code(vnx::Hash64(0x4348135a36d845feull));
 const vnx::TypeCode* const vnx_native_type_code_Velocity2 = vnx::get_type_code(vnx::Hash64(0x4e269b39d3fbacaull));
+const vnx::TypeCode* const vnx_native_type_code_Velocity2Any = vnx::get_type_code(vnx::Hash64(0x394b4023d92fd2e4ull));
 const vnx::TypeCode* const vnx_native_type_code_Velocity4 = vnx::get_type_code(vnx::Hash64(0x8bb69c60caf044a2ull));
 const vnx::TypeCode* const vnx_native_type_code_VelocityAny = vnx::get_type_code(vnx::Hash64(0x6437a68b429d5443ull));
 const vnx::TypeCode* const vnx_native_type_code_position_code_e = vnx::get_type_code(vnx::Hash64(0xed3379d173735421ull));
-const vnx::TypeCode* const vnx_native_type_code_steering_drive_t = vnx::get_type_code(vnx::Hash64(0xbb66f1b236cdee5bull));
 
 } // namespace pilot
 } // namespace kinematics
