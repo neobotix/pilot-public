@@ -15,6 +15,7 @@ struct kinematic_type_e {
 	enum enum_t : uint32_t {
 		BICYCLE = 3167636936l,
 		DIFFERENTIAL = 158731254l,
+		DIFFSTEER = 2304325072l,
 		MECANUM = 1684201171l,
 		NONE = 738838069l,
 		OMNIDRIVE = 3296288869l,

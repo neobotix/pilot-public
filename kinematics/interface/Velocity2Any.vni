@@ -1,0 +1,10 @@
+package pilot.kinematics;
+
+class Velocity2Any {
+
+	map<position_code_e, Velocity2> velocities;
+	
+	Velocity2 get(position_code_e position) const;
+	void set(position_code_e position, Velocity2 value);
+	
+}

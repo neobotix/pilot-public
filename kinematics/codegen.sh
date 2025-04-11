@@ -7,6 +7,7 @@ DIR="$(pwd)"
 ./bicycle/codegen.sh "$1 ${DIR}/interface/"
 ./mecanum/codegen.sh "$1 ${DIR}/interface/"
 ./omnidrive/codegen.sh "$1 ${DIR}/interface/"
+./diffsteer/codegen.sh "$1 ${DIR}/interface/"
 
 vnxcppcodegen --cleanup generated/ pilot.kinematics interface/ $1
 
