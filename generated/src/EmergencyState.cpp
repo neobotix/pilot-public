@@ -14,7 +14,7 @@ namespace pilot {
 
 
 const vnx::Hash64 EmergencyState::VNX_TYPE_HASH(0x77fc634da8371a8eull);
-const vnx::Hash64 EmergencyState::VNX_CODE_HASH(0xc1cbf22d48e9d10full);
+const vnx::Hash64 EmergencyState::VNX_CODE_HASH(0x36d891bd90142bull);
 
 vnx::Hash64 EmergencyState::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -50,7 +50,6 @@ void EmergencyState::accept(vnx::Visitor& _visitor) const {
 	_visitor.type_field(_type_code->fields[0], 0); vnx::accept(_visitor, time);
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, code);
 	_visitor.type_field(_type_code->fields[2], 2); vnx::accept(_visitor, state);
-	_visitor.type_field(_type_code->fields[3], 3); vnx::accept(_visitor, brakes_closed);
 	_visitor.type_end(*_type_code);
 }
 
@@ -59,7 +58,6 @@ void EmergencyState::write(std::ostream& _out) const {
 	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"code\": "; vnx::write(_out, code);
 	_out << ", \"state\": "; vnx::write(_out, state);
-	_out << ", \"brakes_closed\": "; vnx::write(_out, brakes_closed);
 	_out << "}";
 }
 
@@ -75,15 +73,12 @@ vnx::Object EmergencyState::to_object() const {
 	_object["time"] = time;
 	_object["code"] = code;
 	_object["state"] = state;
-	_object["brakes_closed"] = brakes_closed;
 	return _object;
 }
 
 void EmergencyState::from_object(const vnx::Object& _object) {
 	for(const auto& _entry : _object.field) {
-		if(_entry.first == "brakes_closed") {
-			_entry.second.to(brakes_closed);
-		} else if(_entry.first == "code") {
+		if(_entry.first == "code") {
 			_entry.second.to(code);
 		} else if(_entry.first == "state") {
 			_entry.second.to(state);
@@ -103,9 +98,6 @@ vnx::Variant EmergencyState::get_field(const std::string& _name) const {
 	if(_name == "state") {
 		return vnx::Variant(state);
 	}
-	if(_name == "brakes_closed") {
-		return vnx::Variant(brakes_closed);
-	}
 	return vnx::Variant();
 }
 
@@ -116,8 +108,6 @@ void EmergencyState::set_field(const std::string& _name, const vnx::Variant& _va
 		_value.to(code);
 	} else if(_name == "state") {
 		_value.to(state);
-	} else if(_name == "brakes_closed") {
-		_value.to(brakes_closed);
 	} else {
 		throw std::logic_error("no such field: '" + _name + "'");
 	}
@@ -147,7 +137,7 @@ std::shared_ptr<vnx::TypeCode> EmergencyState::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.EmergencyState";
 	type_code->type_hash = vnx::Hash64(0x77fc634da8371a8eull);
-	type_code->code_hash = vnx::Hash64(0xc1cbf22d48e9d10full);
+	type_code->code_hash = vnx::Hash64(0x36d891bd90142bull);
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->native_size = sizeof(::pilot::EmergencyState);
@@ -155,7 +145,7 @@ std::shared_ptr<vnx::TypeCode> EmergencyState::static_create_type_code() {
 	type_code->depends.resize(2);
 	type_code->depends[0] = ::pilot::safety_code_e::static_get_type_code();
 	type_code->depends[1] = ::pilot::em_stop_state_e::static_get_type_code();
-	type_code->fields.resize(4);
+	type_code->fields.resize(3);
 	{
 		auto& field = type_code->fields[0];
 		field.data_size = 8;
@@ -173,12 +163,6 @@ std::shared_ptr<vnx::TypeCode> EmergencyState::static_create_type_code() {
 		field.is_extended = true;
 		field.name = "state";
 		field.code = {19, 1};
-	}
-	{
-		auto& field = type_code->fields[3];
-		field.is_extended = true;
-		field.name = "brakes_closed";
-		field.code = {33, 31};
 	}
 	type_code->build();
 	return type_code;
@@ -230,7 +214,6 @@ void read(TypeInput& in, ::pilot::EmergencyState& value, const TypeCode* type_co
 		switch(_field->native_index) {
 			case 1: vnx::read(in, value.code, type_code, _field->code.data()); break;
 			case 2: vnx::read(in, value.state, type_code, _field->code.data()); break;
-			case 3: vnx::read(in, value.brakes_closed, type_code, _field->code.data()); break;
 			default: vnx::skip(in, type_code, _field->code.data());
 		}
 	}
@@ -253,7 +236,6 @@ void write(TypeOutput& out, const ::pilot::EmergencyState& value, const TypeCode
 	vnx::write_value(_buf + 0, value.time);
 	vnx::write(out, value.code, type_code, type_code->fields[1].code.data());
 	vnx::write(out, value.state, type_code, type_code->fields[2].code.data());
-	vnx::write(out, value.brakes_closed, type_code, type_code->fields[3].code.data());
 }
 
 void read(std::istream& in, ::pilot::EmergencyState& value) {

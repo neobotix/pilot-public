@@ -13,7 +13,7 @@ namespace pilot {
 
 
 const vnx::Hash64 SystemState::VNX_TYPE_HASH(0x6581fb0fdb31ddaeull);
-const vnx::Hash64 SystemState::VNX_CODE_HASH(0xff6ba0ec85f3c2a8ull);
+const vnx::Hash64 SystemState::VNX_CODE_HASH(0xcb3370a58ded1ecdull);
 
 vnx::Hash64 SystemState::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -50,6 +50,8 @@ void SystemState::accept(vnx::Visitor& _visitor) const {
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, system_errors);
 	_visitor.type_field(_type_code->fields[2], 2); vnx::accept(_visitor, is_shutdown);
 	_visitor.type_field(_type_code->fields[3], 3); vnx::accept(_visitor, is_initialized);
+	_visitor.type_field(_type_code->fields[4], 4); vnx::accept(_visitor, is_operational);
+	_visitor.type_field(_type_code->fields[5], 5); vnx::accept(_visitor, brakes_closed);
 	_visitor.type_end(*_type_code);
 }
 
@@ -59,6 +61,8 @@ void SystemState::write(std::ostream& _out) const {
 	_out << ", \"system_errors\": "; vnx::write(_out, system_errors);
 	_out << ", \"is_shutdown\": "; vnx::write(_out, is_shutdown);
 	_out << ", \"is_initialized\": "; vnx::write(_out, is_initialized);
+	_out << ", \"is_operational\": "; vnx::write(_out, is_operational);
+	_out << ", \"brakes_closed\": "; vnx::write(_out, brakes_closed);
 	_out << "}";
 }
 
@@ -75,13 +79,19 @@ vnx::Object SystemState::to_object() const {
 	_object["system_errors"] = system_errors;
 	_object["is_shutdown"] = is_shutdown;
 	_object["is_initialized"] = is_initialized;
+	_object["is_operational"] = is_operational;
+	_object["brakes_closed"] = brakes_closed;
 	return _object;
 }
 
 void SystemState::from_object(const vnx::Object& _object) {
 	for(const auto& _entry : _object.field) {
-		if(_entry.first == "is_initialized") {
+		if(_entry.first == "brakes_closed") {
+			_entry.second.to(brakes_closed);
+		} else if(_entry.first == "is_initialized") {
 			_entry.second.to(is_initialized);
+		} else if(_entry.first == "is_operational") {
+			_entry.second.to(is_operational);
 		} else if(_entry.first == "is_shutdown") {
 			_entry.second.to(is_shutdown);
 		} else if(_entry.first == "system_errors") {
@@ -105,6 +115,12 @@ vnx::Variant SystemState::get_field(const std::string& _name) const {
 	if(_name == "is_initialized") {
 		return vnx::Variant(is_initialized);
 	}
+	if(_name == "is_operational") {
+		return vnx::Variant(is_operational);
+	}
+	if(_name == "brakes_closed") {
+		return vnx::Variant(brakes_closed);
+	}
 	return vnx::Variant();
 }
 
@@ -117,6 +133,10 @@ void SystemState::set_field(const std::string& _name, const vnx::Variant& _value
 		_value.to(is_shutdown);
 	} else if(_name == "is_initialized") {
 		_value.to(is_initialized);
+	} else if(_name == "is_operational") {
+		_value.to(is_operational);
+	} else if(_name == "brakes_closed") {
+		_value.to(brakes_closed);
 	} else {
 		throw std::logic_error("no such field: '" + _name + "'");
 	}
@@ -146,14 +166,14 @@ std::shared_ptr<vnx::TypeCode> SystemState::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.SystemState";
 	type_code->type_hash = vnx::Hash64(0x6581fb0fdb31ddaeull);
-	type_code->code_hash = vnx::Hash64(0xff6ba0ec85f3c2a8ull);
+	type_code->code_hash = vnx::Hash64(0xcb3370a58ded1ecdull);
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->native_size = sizeof(::pilot::SystemState);
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<SystemState>(); };
 	type_code->depends.resize(1);
 	type_code->depends[0] = ::pilot::system_error_e::static_get_type_code();
-	type_code->fields.resize(4);
+	type_code->fields.resize(6);
 	{
 		auto& field = type_code->fields[0];
 		field.data_size = 8;
@@ -177,6 +197,18 @@ std::shared_ptr<vnx::TypeCode> SystemState::static_create_type_code() {
 		field.data_size = 1;
 		field.name = "is_initialized";
 		field.code = {31};
+	}
+	{
+		auto& field = type_code->fields[4];
+		field.data_size = 1;
+		field.name = "is_operational";
+		field.code = {31};
+	}
+	{
+		auto& field = type_code->fields[5];
+		field.is_extended = true;
+		field.name = "brakes_closed";
+		field.code = {33, 31};
 	}
 	type_code->build();
 	return type_code;
@@ -229,10 +261,14 @@ void read(TypeInput& in, ::pilot::SystemState& value, const TypeCode* type_code,
 		if(const auto* const _field = type_code->field_map[3]) {
 			vnx::read_value(_buf + _field->offset, value.is_initialized, _field->code.data());
 		}
+		if(const auto* const _field = type_code->field_map[4]) {
+			vnx::read_value(_buf + _field->offset, value.is_operational, _field->code.data());
+		}
 	}
 	for(const auto* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
 			case 1: vnx::read(in, value.system_errors, type_code, _field->code.data()); break;
+			case 5: vnx::read(in, value.brakes_closed, type_code, _field->code.data()); break;
 			default: vnx::skip(in, type_code, _field->code.data());
 		}
 	}
@@ -251,11 +287,13 @@ void write(TypeOutput& out, const ::pilot::SystemState& value, const TypeCode* t
 	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
-	char* const _buf = out.write(10);
+	char* const _buf = out.write(11);
 	vnx::write_value(_buf + 0, value.time);
 	vnx::write_value(_buf + 8, value.is_shutdown);
 	vnx::write_value(_buf + 9, value.is_initialized);
+	vnx::write_value(_buf + 10, value.is_operational);
 	vnx::write(out, value.system_errors, type_code, type_code->fields[1].code.data());
+	vnx::write(out, value.brakes_closed, type_code, type_code->fields[5].code.data());
 }
 
 void read(std::istream& in, ::pilot::SystemState& value) {

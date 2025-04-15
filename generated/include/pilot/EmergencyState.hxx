@@ -18,7 +18,6 @@ public:
 	int64_t time = 0;
 	::pilot::safety_code_e code;
 	::pilot::em_stop_state_e state;
-	vnx::optional<vnx::bool_t> brakes_closed;
 	
 	typedef ::vnx::Value Super;
 	
