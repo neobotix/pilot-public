@@ -10,7 +10,7 @@ class SystemState {
 	
 	bool is_initialized;						// if platform is initialized (hardware wise)
 
-	bool is_operational;						// if platform is currently ready for movement
+	bool is_operational = true;					// if platform is currently ready for movement
 
 	optional<bool> brakes_closed;
 }
