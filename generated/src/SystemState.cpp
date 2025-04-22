@@ -13,7 +13,7 @@ namespace pilot {
 
 
 const vnx::Hash64 SystemState::VNX_TYPE_HASH(0x6581fb0fdb31ddaeull);
-const vnx::Hash64 SystemState::VNX_CODE_HASH(0xcb3370a58ded1ecdull);
+const vnx::Hash64 SystemState::VNX_CODE_HASH(0x5e14592b3f20df16ull);
 
 vnx::Hash64 SystemState::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -166,7 +166,7 @@ std::shared_ptr<vnx::TypeCode> SystemState::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.SystemState";
 	type_code->type_hash = vnx::Hash64(0x6581fb0fdb31ddaeull);
-	type_code->code_hash = vnx::Hash64(0xcb3370a58ded1ecdull);
+	type_code->code_hash = vnx::Hash64(0x5e14592b3f20df16ull);
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->native_size = sizeof(::pilot::SystemState);
@@ -202,6 +202,7 @@ std::shared_ptr<vnx::TypeCode> SystemState::static_create_type_code() {
 		auto& field = type_code->fields[4];
 		field.data_size = 1;
 		field.name = "is_operational";
+		field.value = vnx::to_string(true);
 		field.code = {31};
 	}
 	{

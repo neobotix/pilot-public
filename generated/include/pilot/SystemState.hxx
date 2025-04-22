@@ -18,7 +18,7 @@ public:
 	std::set<::pilot::system_error_e> system_errors;
 	vnx::bool_t is_shutdown = 0;
 	vnx::bool_t is_initialized = 0;
-	vnx::bool_t is_operational = 0;
+	vnx::bool_t is_operational = true;
 	vnx::optional<vnx::bool_t> brakes_closed;
 	
 	typedef ::vnx::Value Super;
