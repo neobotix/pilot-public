@@ -1,0 +1,8 @@
+package pilot;
+
+enum rotation_type_e{
+	EULER_EXTRINSIC,
+	EULER_INTRINSIC,
+	EULER_25D,
+	RODRIGUES,
+}
