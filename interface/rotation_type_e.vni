@@ -1,8 +1,9 @@
 package pilot;
 
 enum rotation_type_e{
-	EULER_EXTRINSIC,
-	EULER_INTRINSIC,
-	EULER_25D,
-	RODRIGUES,
+	EULER_EXTRINSIC,                                        // rotation = (x, y, z) [rad]
+	EULER_INTRINSIC,                                        // rotation = (roll, pitch, yaw) [rad]
+	EULER_25D,                                              // rotation = (_, _, yaw) [rad]
+	RODRIGUES,                                              // rotation = phi * (k_1, k_2, k_3) with phi in [rad] and norm(k_1, k_2, k_3) = 1
+	QUATERNION,                                             // rotation = (q_1, q_2, q_3) with norm(q_0, q_1, q_2, q_3) = 1
 }

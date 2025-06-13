@@ -11,5 +11,5 @@ class TransformBase3D{
 	rotation_type_e rotation_type;
 
 	double offset[3];                                           // x, y, z [m, m, m]
-	double rotation[3];                                         // roll, pitch, yaw [rad, rad, rad]
+	double rotation[3];                                         // depending on rotation type
 }
