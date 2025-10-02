@@ -1,0 +1,16 @@
+package pilot.kinematics.linear;
+
+class DriveState {
+
+	long time;                                     // POSIX timestamp [usec]
+
+	pilot.kinematics.PositionAny position;
+
+	pilot.kinematics.VelocityAny velocity;
+
+	pilot.kinematics.TorqueAny torque;
+
+	bool has_torque;
+
+}
+

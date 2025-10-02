@@ -1,0 +1,10 @@
+package pilot.kinematics.linear;
+
+class DriveCmd {
+
+	long time;                                            // POSIX timestamp [usec]
+
+	pilot.kinematics.PositionAny position;                // [rad]
+
+}
+

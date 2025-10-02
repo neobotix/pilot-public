@@ -8,6 +8,7 @@ enum kinematic_type_e {
 	MECANUM,
 	OMNIDRIVE,
 	DIFFSTEER,
+	LINEAR,
 	SIMULATION
 	
 }

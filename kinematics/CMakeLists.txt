@@ -27,4 +27,5 @@ add_subdirectory(bicycle)
 add_subdirectory(mecanum)
 add_subdirectory(omnidrive)
 add_subdirectory(diffsteer)
+add_subdirectory(linear)
 
