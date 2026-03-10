@@ -15,8 +15,9 @@ public:
 	
 	int64_t time = 0;
 	std::array<vnx::float32_t, 16> sensor = {};
+	std::array<int8_t, 4> signal_source = {};
 	std::array<int16_t, 4> analog_input = {};
-	vnx::float32_t analog_input_scale = 0.004887;
+	vnx::float32_t analog_input_scale = 0.001221;
 	
 	typedef ::vnx::Value Super;
 	

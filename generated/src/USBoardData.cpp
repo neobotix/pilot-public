@@ -12,7 +12,7 @@ namespace pilot {
 
 
 const vnx::Hash64 USBoardData::VNX_TYPE_HASH(0x4850604e2930c0a0ull);
-const vnx::Hash64 USBoardData::VNX_CODE_HASH(0x913249d6abf60fdbull);
+const vnx::Hash64 USBoardData::VNX_CODE_HASH(0x3217d0fed6cff032ull);
 
 vnx::Hash64 USBoardData::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -47,8 +47,9 @@ void USBoardData::accept(vnx::Visitor& _visitor) const {
 	_visitor.type_begin(*_type_code);
 	_visitor.type_field(_type_code->fields[0], 0); vnx::accept(_visitor, time);
 	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, sensor);
-	_visitor.type_field(_type_code->fields[2], 2); vnx::accept(_visitor, analog_input);
-	_visitor.type_field(_type_code->fields[3], 3); vnx::accept(_visitor, analog_input_scale);
+	_visitor.type_field(_type_code->fields[2], 2); vnx::accept(_visitor, signal_source);
+	_visitor.type_field(_type_code->fields[3], 3); vnx::accept(_visitor, analog_input);
+	_visitor.type_field(_type_code->fields[4], 4); vnx::accept(_visitor, analog_input_scale);
 	_visitor.type_end(*_type_code);
 }
 
@@ -56,6 +57,7 @@ void USBoardData::write(std::ostream& _out) const {
 	_out << "{\"__type\": \"pilot.USBoardData\"";
 	_out << ", \"time\": "; vnx::write(_out, time);
 	_out << ", \"sensor\": "; vnx::write(_out, sensor);
+	_out << ", \"signal_source\": "; vnx::write(_out, signal_source);
 	_out << ", \"analog_input\": "; vnx::write(_out, analog_input);
 	_out << ", \"analog_input_scale\": "; vnx::write(_out, analog_input_scale);
 	_out << "}";
@@ -72,6 +74,7 @@ vnx::Object USBoardData::to_object() const {
 	_object["__type"] = "pilot.USBoardData";
 	_object["time"] = time;
 	_object["sensor"] = sensor;
+	_object["signal_source"] = signal_source;
 	_object["analog_input"] = analog_input;
 	_object["analog_input_scale"] = analog_input_scale;
 	return _object;
@@ -85,6 +88,8 @@ void USBoardData::from_object(const vnx::Object& _object) {
 			_entry.second.to(analog_input_scale);
 		} else if(_entry.first == "sensor") {
 			_entry.second.to(sensor);
+		} else if(_entry.first == "signal_source") {
+			_entry.second.to(signal_source);
 		} else if(_entry.first == "time") {
 			_entry.second.to(time);
 		}
@@ -97,6 +102,9 @@ vnx::Variant USBoardData::get_field(const std::string& _name) const {
 	}
 	if(_name == "sensor") {
 		return vnx::Variant(sensor);
+	}
+	if(_name == "signal_source") {
+		return vnx::Variant(signal_source);
 	}
 	if(_name == "analog_input") {
 		return vnx::Variant(analog_input);
@@ -112,6 +120,8 @@ void USBoardData::set_field(const std::string& _name, const vnx::Variant& _value
 		_value.to(time);
 	} else if(_name == "sensor") {
 		_value.to(sensor);
+	} else if(_name == "signal_source") {
+		_value.to(signal_source);
 	} else if(_name == "analog_input") {
 		_value.to(analog_input);
 	} else if(_name == "analog_input_scale") {
@@ -145,12 +155,12 @@ std::shared_ptr<vnx::TypeCode> USBoardData::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.USBoardData";
 	type_code->type_hash = vnx::Hash64(0x4850604e2930c0a0ull);
-	type_code->code_hash = vnx::Hash64(0x913249d6abf60fdbull);
+	type_code->code_hash = vnx::Hash64(0x3217d0fed6cff032ull);
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->native_size = sizeof(::pilot::USBoardData);
 	type_code->create_value = []() -> std::shared_ptr<vnx::Value> { return std::make_shared<USBoardData>(); };
-	type_code->fields.resize(4);
+	type_code->fields.resize(5);
 	{
 		auto& field = type_code->fields[0];
 		field.data_size = 8;
@@ -165,15 +175,21 @@ std::shared_ptr<vnx::TypeCode> USBoardData::static_create_type_code() {
 	}
 	{
 		auto& field = type_code->fields[2];
+		field.data_size = 4;
+		field.name = "signal_source";
+		field.code = {11, 4, 5};
+	}
+	{
+		auto& field = type_code->fields[3];
 		field.data_size = 8;
 		field.name = "analog_input";
 		field.code = {11, 4, 6};
 	}
 	{
-		auto& field = type_code->fields[3];
+		auto& field = type_code->fields[4];
 		field.data_size = 4;
 		field.name = "analog_input_scale";
-		field.value = vnx::to_string(0.004887);
+		field.value = vnx::to_string(0.001221);
 		field.code = {9};
 	}
 	type_code->build();
@@ -225,9 +241,12 @@ void read(TypeInput& in, ::pilot::USBoardData& value, const TypeCode* type_code,
 			vnx::read_value(_buf + _field->offset, value.sensor, _field->code.data());
 		}
 		if(const auto* const _field = type_code->field_map[2]) {
-			vnx::read_value(_buf + _field->offset, value.analog_input, _field->code.data());
+			vnx::read_value(_buf + _field->offset, value.signal_source, _field->code.data());
 		}
 		if(const auto* const _field = type_code->field_map[3]) {
+			vnx::read_value(_buf + _field->offset, value.analog_input, _field->code.data());
+		}
+		if(const auto* const _field = type_code->field_map[4]) {
 			vnx::read_value(_buf + _field->offset, value.analog_input_scale, _field->code.data());
 		}
 	}
@@ -251,11 +270,12 @@ void write(TypeOutput& out, const ::pilot::USBoardData& value, const TypeCode* t
 	else if(code && code[0] == CODE_STRUCT) {
 		type_code = type_code->depends[code[1]];
 	}
-	char* const _buf = out.write(84);
+	char* const _buf = out.write(88);
 	vnx::write_value(_buf + 0, value.time);
 	vnx::write_value(_buf + 8, value.sensor);
-	vnx::write_value(_buf + 72, value.analog_input);
-	vnx::write_value(_buf + 80, value.analog_input_scale);
+	vnx::write_value(_buf + 72, value.signal_source);
+	vnx::write_value(_buf + 76, value.analog_input);
+	vnx::write_value(_buf + 84, value.analog_input_scale);
 }
 
 void read(std::istream& in, ::pilot::USBoardData& value) {
