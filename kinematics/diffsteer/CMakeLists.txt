@@ -14,7 +14,9 @@ target_link_libraries(pilot_kinematics_diffsteer_interface
 	pilot_kinematics_interface
 )
 
-install(DIRECTORY generated/include/ DESTINATION include)
+if(PILOT_CODEGEN)
+	install(DIRECTORY generated/include/ DESTINATION include)
+endif()
 install(DIRECTORY interface/ DESTINATION interface/pilot/kinematics/diffsteer)
 install(TARGETS pilot_kinematics_diffsteer_interface DESTINATION lib)
 

@@ -17,9 +17,10 @@ target_include_directories(pilot_kinematics_interface PUBLIC
 
 target_link_libraries(pilot_kinematics_interface vnx_base)
 
-install(DIRECTORY generated/include/ DESTINATION include)
+if(PILOT_CODEGEN)
+	install(DIRECTORY generated/include/ DESTINATION include)
+endif()
 install(DIRECTORY interface/ DESTINATION interface/pilot/kinematics)
-
 install(TARGETS pilot_kinematics_interface DESTINATION lib)
 
 add_subdirectory(differential)
