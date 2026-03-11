@@ -2,7 +2,6 @@ package pilot;
 
 enum safety_code_e {
 	
-	NONE,
 	SCANNER_STOP,
 	EMERGENCY_STOP,
 	RADIO_EMERGENCY_STOP,
