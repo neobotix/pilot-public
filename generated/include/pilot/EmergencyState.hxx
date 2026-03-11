@@ -16,7 +16,7 @@ class EmergencyState : public ::vnx::Value {
 public:
 	
 	int64_t time = 0;
-	::pilot::safety_code_e code;
+	std::set<::pilot::safety_code_e> codes;
 	::pilot::em_stop_state_e state;
 	
 	typedef ::vnx::Value Super;

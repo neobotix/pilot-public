@@ -14,7 +14,6 @@ struct safety_code_e {
 	
 	enum enum_t : uint32_t {
 		EMERGENCY_STOP = 3663143748l,
-		NONE = 738838069l,
 		RADIO_EMERGENCY_STOP = 2266660860l,
 		SCANNER_STOP = 1635110347l,
 	};

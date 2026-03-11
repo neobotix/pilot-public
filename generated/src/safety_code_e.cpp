@@ -11,7 +11,7 @@ namespace pilot {
 
 
 const vnx::Hash64 safety_code_e::VNX_TYPE_HASH(0x3e30cd770f8f7239ull);
-const vnx::Hash64 safety_code_e::VNX_CODE_HASH(0x5fcde5cfb62a7094ull);
+const vnx::Hash64 safety_code_e::VNX_CODE_HASH(0x119f882fd652dde1ull);
 
 vnx::Hash64 safety_code_e::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -44,7 +44,6 @@ void safety_code_e::write(vnx::TypeOutput& _out, const vnx::TypeCode* _type_code
 vnx::bool_t safety_code_e::is_valid() const {
 	switch(value) {
 		case EMERGENCY_STOP: return true;
-		case NONE: return true;
 		case RADIO_EMERGENCY_STOP: return true;
 		case SCANNER_STOP: return true;
 	}
@@ -54,7 +53,6 @@ vnx::bool_t safety_code_e::is_valid() const {
 std::string safety_code_e::to_string() const {
 	switch(value) {
 		case EMERGENCY_STOP: return "\"EMERGENCY_STOP\"";
-		case NONE: return "\"NONE\"";
 		case RADIO_EMERGENCY_STOP: return "\"RADIO_EMERGENCY_STOP\"";
 		case SCANNER_STOP: return "\"SCANNER_STOP\"";
 	}
@@ -64,7 +62,6 @@ std::string safety_code_e::to_string() const {
 std::string safety_code_e::to_string_value() const {
 	switch(value) {
 		case EMERGENCY_STOP: return "EMERGENCY_STOP";
-		case NONE: return "NONE";
 		case RADIO_EMERGENCY_STOP: return "RADIO_EMERGENCY_STOP";
 		case SCANNER_STOP: return "SCANNER_STOP";
 	}
@@ -74,7 +71,6 @@ std::string safety_code_e::to_string_value() const {
 std::string safety_code_e::to_string_value_full() const {
 	switch(value) {
 		case EMERGENCY_STOP: return "pilot.safety_code_e.EMERGENCY_STOP";
-		case NONE: return "pilot.safety_code_e.NONE";
 		case RADIO_EMERGENCY_STOP: return "pilot.safety_code_e.RADIO_EMERGENCY_STOP";
 		case SCANNER_STOP: return "pilot.safety_code_e.SCANNER_STOP";
 	}
@@ -92,7 +88,6 @@ void safety_code_e::from_string_value(const std::string& _name) {
 	vnx::from_string_value(_name, var);
 	if(var.is_string()) {
 		if(_name == "EMERGENCY_STOP") value = EMERGENCY_STOP;
-		else if(_name == "NONE") value = NONE;
 		else if(_name == "RADIO_EMERGENCY_STOP") value = RADIO_EMERGENCY_STOP;
 		else if(_name == "SCANNER_STOP") value = SCANNER_STOP;
 		else value = enum_t(vnx::hash64(_name));
@@ -105,7 +100,6 @@ void safety_code_e::accept(vnx::Visitor& _visitor) const {
 	std::string _name;
 	switch(value) {
 		case EMERGENCY_STOP: _name = "EMERGENCY_STOP"; break;
-		case NONE: _name = "NONE"; break;
 		case RADIO_EMERGENCY_STOP: _name = "RADIO_EMERGENCY_STOP"; break;
 		case SCANNER_STOP: _name = "SCANNER_STOP"; break;
 	}
@@ -115,7 +109,6 @@ void safety_code_e::accept(vnx::Visitor& _visitor) const {
 void safety_code_e::write(std::ostream& _out) const {
 	switch(value) {
 		case EMERGENCY_STOP: _out << "\"EMERGENCY_STOP\""; break;
-		case NONE: _out << "\"NONE\""; break;
 		case RADIO_EMERGENCY_STOP: _out << "\"RADIO_EMERGENCY_STOP\""; break;
 		case SCANNER_STOP: _out << "\"SCANNER_STOP\""; break;
 		default: _out << value;
@@ -180,7 +173,7 @@ std::shared_ptr<vnx::TypeCode> safety_code_e::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.safety_code_e";
 	type_code->type_hash = vnx::Hash64(0x3e30cd770f8f7239ull);
-	type_code->code_hash = vnx::Hash64(0x5fcde5cfb62a7094ull);
+	type_code->code_hash = vnx::Hash64(0x119f882fd652dde1ull);
 	type_code->is_native = true;
 	type_code->is_enum = true;
 	type_code->native_size = sizeof(::pilot::safety_code_e);
@@ -193,7 +186,6 @@ std::shared_ptr<vnx::TypeCode> safety_code_e::static_create_type_code() {
 		field.code = {3};
 	}
 	type_code->enum_map[3663143748] = "EMERGENCY_STOP";
-	type_code->enum_map[738838069] = "NONE";
 	type_code->enum_map[2266660860] = "RADIO_EMERGENCY_STOP";
 	type_code->enum_map[1635110347] = "SCANNER_STOP";
 	type_code->build();

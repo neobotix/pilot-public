@@ -14,7 +14,7 @@ namespace pilot {
 
 
 const vnx::Hash64 EmergencyState::VNX_TYPE_HASH(0x77fc634da8371a8eull);
-const vnx::Hash64 EmergencyState::VNX_CODE_HASH(0x36d891bd90142bull);
+const vnx::Hash64 EmergencyState::VNX_CODE_HASH(0xba7079b7618fca2aull);
 
 vnx::Hash64 EmergencyState::get_type_hash() const {
 	return VNX_TYPE_HASH;
@@ -48,7 +48,7 @@ void EmergencyState::accept(vnx::Visitor& _visitor) const {
 	const vnx::TypeCode* _type_code = pilot::vnx_native_type_code_EmergencyState;
 	_visitor.type_begin(*_type_code);
 	_visitor.type_field(_type_code->fields[0], 0); vnx::accept(_visitor, time);
-	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, code);
+	_visitor.type_field(_type_code->fields[1], 1); vnx::accept(_visitor, codes);
 	_visitor.type_field(_type_code->fields[2], 2); vnx::accept(_visitor, state);
 	_visitor.type_end(*_type_code);
 }
@@ -56,7 +56,7 @@ void EmergencyState::accept(vnx::Visitor& _visitor) const {
 void EmergencyState::write(std::ostream& _out) const {
 	_out << "{\"__type\": \"pilot.EmergencyState\"";
 	_out << ", \"time\": "; vnx::write(_out, time);
-	_out << ", \"code\": "; vnx::write(_out, code);
+	_out << ", \"codes\": "; vnx::write(_out, codes);
 	_out << ", \"state\": "; vnx::write(_out, state);
 	_out << "}";
 }
@@ -71,15 +71,15 @@ vnx::Object EmergencyState::to_object() const {
 	vnx::Object _object;
 	_object["__type"] = "pilot.EmergencyState";
 	_object["time"] = time;
-	_object["code"] = code;
+	_object["codes"] = codes;
 	_object["state"] = state;
 	return _object;
 }
 
 void EmergencyState::from_object(const vnx::Object& _object) {
 	for(const auto& _entry : _object.field) {
-		if(_entry.first == "code") {
-			_entry.second.to(code);
+		if(_entry.first == "codes") {
+			_entry.second.to(codes);
 		} else if(_entry.first == "state") {
 			_entry.second.to(state);
 		} else if(_entry.first == "time") {
@@ -92,8 +92,8 @@ vnx::Variant EmergencyState::get_field(const std::string& _name) const {
 	if(_name == "time") {
 		return vnx::Variant(time);
 	}
-	if(_name == "code") {
-		return vnx::Variant(code);
+	if(_name == "codes") {
+		return vnx::Variant(codes);
 	}
 	if(_name == "state") {
 		return vnx::Variant(state);
@@ -104,8 +104,8 @@ vnx::Variant EmergencyState::get_field(const std::string& _name) const {
 void EmergencyState::set_field(const std::string& _name, const vnx::Variant& _value) {
 	if(_name == "time") {
 		_value.to(time);
-	} else if(_name == "code") {
-		_value.to(code);
+	} else if(_name == "codes") {
+		_value.to(codes);
 	} else if(_name == "state") {
 		_value.to(state);
 	} else {
@@ -137,7 +137,7 @@ std::shared_ptr<vnx::TypeCode> EmergencyState::static_create_type_code() {
 	auto type_code = std::make_shared<vnx::TypeCode>();
 	type_code->name = "pilot.EmergencyState";
 	type_code->type_hash = vnx::Hash64(0x77fc634da8371a8eull);
-	type_code->code_hash = vnx::Hash64(0x36d891bd90142bull);
+	type_code->code_hash = vnx::Hash64(0xba7079b7618fca2aull);
 	type_code->is_native = true;
 	type_code->is_class = true;
 	type_code->native_size = sizeof(::pilot::EmergencyState);
@@ -155,8 +155,8 @@ std::shared_ptr<vnx::TypeCode> EmergencyState::static_create_type_code() {
 	{
 		auto& field = type_code->fields[1];
 		field.is_extended = true;
-		field.name = "code";
-		field.code = {19, 0};
+		field.name = "codes";
+		field.code = {12, 19, 0};
 	}
 	{
 		auto& field = type_code->fields[2];
@@ -212,7 +212,7 @@ void read(TypeInput& in, ::pilot::EmergencyState& value, const TypeCode* type_co
 	}
 	for(const auto* _field : type_code->ext_fields) {
 		switch(_field->native_index) {
-			case 1: vnx::read(in, value.code, type_code, _field->code.data()); break;
+			case 1: vnx::read(in, value.codes, type_code, _field->code.data()); break;
 			case 2: vnx::read(in, value.state, type_code, _field->code.data()); break;
 			default: vnx::skip(in, type_code, _field->code.data());
 		}
@@ -234,7 +234,7 @@ void write(TypeOutput& out, const ::pilot::EmergencyState& value, const TypeCode
 	}
 	char* const _buf = out.write(8);
 	vnx::write_value(_buf + 0, value.time);
-	vnx::write(out, value.code, type_code, type_code->fields[1].code.data());
+	vnx::write(out, value.codes, type_code, type_code->fields[1].code.data());
 	vnx::write(out, value.state, type_code, type_code->fields[2].code.data());
 }
 
