@@ -9,6 +9,7 @@ file(GLOB GENERATED generated/src/*.cpp)
 
 add_library(pilot_public SHARED
 	${GENERATED}
+	src/EmergencyState.cpp
 	src/Event.cpp
 	src/Incident.cpp
 	src/event_t.cpp

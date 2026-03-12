@@ -32,6 +32,9 @@ public:
 	std::string get_type_name() const override;
 	const vnx::TypeCode* get_type_code() const override;
 	
+	virtual vnx::bool_t is_free() const;
+	virtual vnx::bool_t has_code(const ::pilot::safety_code_e& code = ::pilot::safety_code_e()) const;
+	
 	static std::shared_ptr<EmergencyState> create();
 	std::shared_ptr<vnx::Value> clone() const override;
 	
